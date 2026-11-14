@@ -1,0 +1,10 @@
+# Firebase
+.firebase/
+firebase-debug.log
+.firebaserc
+
+# Test files
+test_*.js
+test_*.html
+
+DESIGN_SYSTEM.md

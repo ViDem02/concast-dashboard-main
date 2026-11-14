@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pianificazione Consumi & PUN 2026</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/forecast.css">
+</head>
+
+<body>
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2"><span class="co2-tree">🌳</span> CO₂</a>
+                <a href="forecast.html" class="app-nav__link is-active">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link">MILP</a>
+                <a href="prodopti.html" class="app-nav__link">Prod</a>
+            </div>
+            <div class="app-nav__meta">
+                <span class="app-pill">Dataset 2024-2026</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="forecast-wrapper">
+        <header class="forecast-hero page-header page-header--gradient">
+            <div class="page-header__content">
+                <p class="eyebrow">Scenario 2026</p>
+                <h1>Media storica 2024-2025 + PUN/PSV stimati</h1>
+                <p class="page-description">
+                    Abbiamo estratto tutti gli orari Normal 2024-2025, calcolato la media di ciascun mese
+                    e affiancato il fotovoltaico stimato dallo scenario ottimizzato FV12. Il risultato è il
+                    fabbisogno elettrico reale 2026 (rete + coge + FV) con il relativo impatto CO₂.
+                    I costi sono stimati applicando i tre scenari PUN/PSV definiti per il 2026.
+                </p>
+            </div>
+            <div class="page-header__actions">
+                <div class="page-highlights">
+                    <p class="page-highlights__title">In questa pagina</p>
+                    <ul class="page-highlights__list">
+                        <li class="page-highlights__item">Indicatori sintetici 2026 (gas, mix EE, autofabbr fabbisogni)
+                        </li>
+                        <li class="page-highlights__item">Confronto scenari PUN/PSV con impatti economici</li>
+                        <li class="page-highlights__item">Traduzioni di CO₂ evitata in metriche comprensibili</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="page-meta page-meta--on-dark">
+                <span class="meta-pill">Media storica 2024-2025</span>
+                <span class="meta-pill">Scenario FV12 Ottimizzato</span>
+                <span class="meta-pill meta-pill--muted">PUN/PSV 2026</span>
+            </div>
+        </header>
+
+        <section class="strategy-advice-section" id="strategy-advice">
+            <div class="strategy-advice__header">
+                <div>
+                    <p class="eyebrow">Guidance 2026</p>
+                    <h2>Modalità coge consigliata (settimanale e mensile)</h2>
+                    <p>Una lettura compatta per capire, a colpo d'occhio, quale strategia tenere fissa per massimizzare
+                        il risparmio. Ogni barra/pill racconta la scelta migliore e il delta rispetto alla baseline
+                        attuale.</p>
+                </div>
+                <div class="strategy-advice__tags">
+                    <span class="meta-pill">Vincolo “una sola modalità”</span>
+                    <span class="meta-pill meta-pill--muted">Baseline: costo attuale</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="strategy-350-toggle" />
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Usa profilo 350 kW</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="strategy-advice__layout">
+                <div class="strategy-legend-bar">
+                    <div class="strategy-legend">
+                        <span class="legend-title">Strategie</span>
+                        <div class="legend-items" id="strategy-legend"></div>
+                    </div>
+                    <p class="strategy-footnote">Risparmio calcolato su costi orari 2024-2025 (baseline: costo attuale).
+                        Griglia 4 colonne x 3 righe: mese + 4 settimane compatte.</p>
+                </div>
+                <div id="strategy-month-strips" class="strategy-month-strips"></div>
+            </div>
+        </section>
+
+        <section class="indicators-section">
+            <div class="indicators-header">
+                <h2>Indicatori 2026</h2>
+                <p class="indicators-subtitle">Media mensile 2024-2025 (Normal) su dati completi da Gen 2024 a Set 2025,
+                    senza esclusioni.</p>
+            </div>
+
+            <div class="indicators-main">
+                <div class="indicator-primary">
+                    <div class="indicator-primary-label">Energia totale con FV</div>
+                    <div class="indicator-primary-value" id="metric-ee-total">--</div>
+                    <div class="indicator-primary-meta" id="metric-ee-meta">Base -- MWh</div>
+                </div>
+
+                <div class="indicators-grid energy-breakdown-grid">
+                    <div class="indicator-item">
+                        <div class="indicator-item-label">
+                            Gas per coge
+                            <span class="info-icon"
+                                data-tooltip="Totale Smc di gas naturale consumati dal cogeneratore per produrre energia elettrica">ⓘ</span>
+                        </div>
+                        <div class="indicator-item-value" id="metric-gas">--</div>
+                        <div class="indicator-item-meta" id="metric-gas-meta">Smc medi</div>
+                    </div>
+
+                    <div class="indicator-item energy-card energy-card--grid">
+                        <div class="indicator-item-label">
+                            Quota rete
+                            <span class="info-icon"
+                                data-tooltip="Energia acquistata dalla rete rispetto al totale consumato (media 2024-2025 applicata al 2026).">ⓘ</span>
+                        </div>
+                        <div class="indicator-item-value" id="metric-grid-share">--</div>
+                        <div class="indicator-item-meta" id="metric-grid-ee-meta"></div>
+                    </div>
+
+                    <div class="indicator-item energy-card energy-card--coge">
+                        <div class="indicator-item-label">
+                            Quota coge
+                            <span class="info-icon"
+                                data-tooltip="Energia prodotta dal cogeneratore sul totale. Se attivi il 350 kW, i valori usano quel profilo.">ⓘ</span>
+                        </div>
+                        <div class="indicator-item-value" id="metric-coge-share">--</div>
+                        <div class="indicator-item-meta" id="metric-coge-ee-meta"></div>
+                    </div>
+
+                    <div class="indicator-item energy-card energy-card--pv">
+                        <div class="indicator-item-label">
+                            Fotovoltaico
+                            <span class="info-icon"
+                                data-tooltip="Produzione FV stimata (scenario FV12) e incidenza sul totale.">ⓘ</span>
+                        </div>
+                        <div class="indicator-item-value" id="metric-pv-share">--</div>
+                        <div class="indicator-item-meta" id="metric-pv-meta">--</div>
+                    </div>
+                </div>
+
+
+                <div class="co2-subsection">
+                    <div class="co2-subsection-header">
+                        <div>
+                            <p class="co2-eyebrow">Scenario 2026 · FV12</p>
+                            <h3>🌱 Impatto CO₂ evitata</h3>
+                            <p>Valore reale della CO₂ evitata dal FV ottimizzato e traduzioni pronte per lo
+                                storytelling.</p>
+                        </div>
+                        <div class="co2-meta-chips">
+                            <span class="co2-chip">Mix rete + coge</span>
+                            <span class="co2-chip">Conversioni pronte</span>
+                        </div>
+                    </div>
+
+                    <div class="co2-main-grid">
+                        <article class="co2-primary-card">
+                            <div class="co2-card-label">
+                                CO₂ risparmiata (FV)
+                                <span class="info-icon"
+                                    data-tooltip="Calcolo: CO₂ evitata (kg) = FV (kWh) × fattore emissione rete (kg CO₂/kWh). Risultato in tonnellate: dividere per 1000. Il fattore rete usato è visibile nel box Emissioni.">ⓘ</span>
+                            </div>
+                            <div class="co2-primary-value" id="metric-co2-saved">--</div>
+                            <p class="co2-card-meta" id="metric-co2-saved-meta">Calcolata con media FV12 2024-2025</p>
+                            <p class="co2-card-note">Indicatore guida del beneficio ambientale</p>
+                        </article>
+
+                        <div class="co2-side-cards">
+                            <article class="co2-compact-card">
+                                <div class="co2-card-label">
+                                    CO₂ rete vs coge
+                                    <span class="info-icon"
+                                        data-tooltip="Formula: CO₂ rete / (CO₂ rete + CO₂ coge). CO₂ rete = EE rete × fattore emissione rete; CO₂ coge = Smc gas × fattore metano (kg/Smc).">ⓘ</span>
+                                </div>
+                                <div class="co2-compact-value" id="metric-co2-breakdown">--</div>
+                                <p class="co2-card-meta" id="summary-co2-meta"></p>
+                            </article>
+
+                            <article class="co2-compact-card">
+                                <div class="co2-card-label">
+                                    Fattori emissione
+                                    <span class="info-icon"
+                                        data-tooltip="Fattori usati nei calcoli: rete (kg CO₂/kWh) × kWh rete; coge (kg CO₂/Smc) × Smc gas. Con questi si ottengono CO₂ rete e CO₂ coge, poi le percentuali.">ⓘ</span>
+                                </div>
+                                <div class="co2-compact-value small" id="metric-emission">--</div>
+                                <p class="co2-card-meta">Configurabili nello script</p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="co2-equivalents">
+                        <div class="co2-equivalents-header">
+                            <p class="co2-eyebrow">Storytelling</p>
+                            <h4>Traduzioni immediate</h4>
+                            <p>Metriche equivalenti per portare il dato fuori dall'ufficio tecnico.</p>
+                        </div>
+                        <div class="co2-equivalents-grid">
+                            <article class="co2-equivalent-card">
+                                <div class="co2-equivalent-icon">🌳</div>
+                                <div>
+                                    <div class="co2-equivalent-label">
+                                        Alberi equivalenti
+                                        <span class="info-icon"
+                                            data-tooltip="Numero di alberi che servirebbero per assorbire la stessa quantità di CO₂ risparmiata grazie al fotovoltaico. Calcolo: CO₂ risparmiata diviso 20 kg/anno per albero">ⓘ</span>
+                                    </div>
+                                    <div class="co2-equivalent-value" id="metric-trees-equivalent">--</div>
+                                    <p class="co2-equivalent-meta">Alberi necessari per assorbire la CO₂ (20 kg/anno per
+                                        albero)</p>
+                                </div>
+                            </article>
+
+                            <article class="co2-equivalent-card">
+                                <div class="co2-equivalent-icon">🚗</div>
+                                <div>
+                                    <div class="co2-equivalent-label">
+                                        Km auto equivalenti
+                                        <span class="info-icon"
+                                            data-tooltip="Kilometri che un'auto media potrebbe percorrere emettendo la stessa quantità di CO₂ risparmiata. Calcolo: CO₂ risparmiata diviso 0,15 kg CO₂/km">ⓘ</span>
+                                    </div>
+                                    <div class="co2-equivalent-value" id="metric-car-km-equivalent">--</div>
+                                    <p class="co2-equivalent-meta">Kilometri percorsi con auto media (0,15 kg CO₂/km)
+                                    </p>
+                                </div>
+                            </article>
+
+                            <article class="co2-equivalent-card">
+                                <div class="co2-equivalent-icon">🏡</div>
+                                <div>
+                                    <div class="co2-equivalent-label">
+                                        Consumo elettrico equivalente
+                                        <span class="info-icon"
+                                            data-tooltip="kWh di energia elettrica dalla rete che genererebbero la stessa quantità di CO₂ risparmiata dal fotovoltaico. Calcolo: CO₂ risparmiata diviso 0,25 kg CO₂/kWh">ⓘ</span>
+                                    </div>
+                                    <div class="co2-equivalent-value" id="metric-electricity-equivalent">--</div>
+                                    <p class="co2-equivalent-meta">kWh consumati con mix elettrico Italia/EU (0,25 kg
+                                        CO₂/kWh)</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="scenario-section">
+            <div class="section-header">
+                <h2>Confronto scenari PUN / PSV 2026</h2>
+                <p>I tre scenari sono sempre visibili: puoi confrontare PUN, PSV e impatto sui costi senza cambiare
+                    pagina.</p>
+            </div>
+            <div class="scenario-compare-grid" id="scenario-compare-grid"></div>
+        </section>
+
+        <section class="chart-section minimal">
+            <div class="section-header">
+                <h2>Trend consumi 2026</h2>
+                <p>Barre blu = rete + coge · segmento giallo = FV stimato (media 2024-2025, scenario FV12).</p>
+            </div>
+            <div class="consumption-chart">
+                <div id="forecast-bars" class="bars-chart" aria-label="Consumi medi mensili 2026"></div>
+                <div class="chart-legend">
+                    <span class="legend-swatch"></span>
+                    <span>Totale EE stimato (kWh)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="section-header">
+                <h2>Dettaglio mensile 2026</h2>
+                <p>Il FV ottimizzato FV12 è già stimato mese per mese: osserva il totale energia e la CO₂ risparmiata.
+                </p>
+            </div>
+            <div class="table-wrapper">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Mese</th>
+                            <th>
+                                EE rete (kWh)
+                                <span class="info-icon"
+                                    data-tooltip="Energia elettrica acquistata dalla rete nazionale. Calcolata come media mensile dei dati storici 2024-2025 (scenario Normal)">ⓘ</span>
+                            </th>
+                            <th>
+                                EE coge (kWh)
+                                <span class="info-icon"
+                                    data-tooltip="Energia elettrica prodotta dal cogeneratore a gas. Calcolata come media mensile dei dati storici 2024-2025 (scenario Normal)">ⓘ</span>
+                            </th>
+                            <th>
+                                FV (kWh)
+                                <span class="info-icon"
+                                    data-tooltip="Energia elettrica prodotta dal fotovoltaico stimato. Dati provenienti dallo scenario ottimizzato FV12 (media 2024-2025)">ⓘ</span>
+                            </th>
+                            <th>
+                                Totale (kWh)
+                                <span class="info-icon"
+                                    data-tooltip="Energia elettrica totale includendo il fotovoltaico. Calcolo: (EE rete + EE coge) + FV">ⓘ</span>
+                            </th>
+                            <th>
+                                <span class="co2-leaf">🍃</span> CO₂ evitata (t)
+                                <span class="info-icon"
+                                    data-tooltip="FV (kWh) × fattore emissione rete (kg CO₂/kWh) → kg; dividere per 1000 per t. Il fattore rete è indicato nel box Emissioni.">ⓘ</span>
+                            </th>
+                            <th>
+                                Scenario Ottimistico
+                                <span class="info-icon"
+                                    data-tooltip="Costo mensile con PUN e PSV bassi. Calcolo: (EE rete × PUN basso) + (Gas coge × PSV basso)">ⓘ</span>
+                            </th>
+                            <th>
+                                Scenario Standard
+                                <span class="info-icon"
+                                    data-tooltip="Costo mensile con PUN e PSV medi. Calcolo: (EE rete × PUN medio) + (Gas coge × PSV medio)">ⓘ</span>
+                            </th>
+                            <th>
+                                Scenario Pessimistico
+                                <span class="info-icon"
+                                    data-tooltip="Costo mensile con PUN e PSV alti. Calcolo: (EE rete × PUN alto) + (Gas coge × PSV alto)">ⓘ</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="monthly-table-body">
+                        <tr>
+                            <td colspan="10">Caricamento dati…</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="monthly-totals-row">
+                            <td></td>
+                            <td>Totale</td>
+                            <td id="monthly-total-grid" class="value-strong">--</td>
+                            <td id="monthly-total-coge" class="value-strong">--</td>
+                            <td id="monthly-total-fv" class="value-strong">--</td>
+                            <td id="monthly-total-total" class="value-strong">--</td>
+                            <td id="monthly-total-co2" class="value-strong">--</td>
+                            <td id="monthly-total-optimistic" class="value-strong">--</td>
+                            <td id="monthly-total-standard" class="value-strong">--</td>
+                            <td id="monthly-total-pessimistic" class="value-strong">--</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <p class="footnote">I costi stimati includono: acquisti rete (EE kWh * PUN) + gas per cogeneratore (Smc *
+                10.55 kWh * PSV). Le medie 2024-2025 usano tutti i dati disponibili da Gen 2024 a Set 2025; il
+                fotovoltaico proviene dallo scenario ottimizzato FV12 e impatta solo sul totale energia e sulla CO₂
+                risparmiata.</p>
+        </section>
+
+        <div id="forecast-loading">Caricamento dati forecast…</div>
+        <div id="forecast-error" style="display:none;"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/forecast.js"></script>
+</body>
+
+</html>

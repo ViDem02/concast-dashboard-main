@@ -1,0 +1,56 @@
+MANUALETTO DI ISTRUZIONI – CONCAST DASHBOARD (Windows)
+
+Cos’è
+- È un programma (ConcastDashboard.exe) che avvia la piattaforma sul vostro PC.
+- Non dovete installare Python, Java o altri programmi.
+- La piattaforma si vede nel browser (Chrome / Edge), NON dentro la finestra del programma.
+- Funziona SOLO sul vostro computer (indirizzo locale 127.0.0.1).
+
+Cosa serve
+- Un PC Windows 10/11
+- Un browser (consigliati: Google Chrome oppure Microsoft Edge)
+
+Come si avvia (prima volta)
+1) Fate doppio click su “ConcastDashboard.exe”.
+2) Non si apre nessuna finestra: è normale.
+3) In basso a destra (vicino all’orologio) comparirà una piccola icona (nell’area di notifica).
+   - Se non la vedete: cliccate sulla freccia ^ per mostrare le icone nascoste.
+4) Aprite il browser e scrivete questo indirizzo:
+   http://127.0.0.1:5000/
+
+Come si usa
+- Una volta aperto l’indirizzo, navigate normalmente tra le pagine della piattaforma.
+- Potete lasciare il programma in esecuzione mentre usate il browser.
+- Se i grafici fossero visualizzati male, provate a ricaricare la pagina: il problema si dovrebbe risolvere automaticamente.
+
+Come si chiude
+1) Andate sull’icona del programma vicino all’orologio.
+2) Clic destro sull’icona.
+3) Selezionate “Quit” (Esci).
+
+Se compare un messaggio di Windows Firewall
+- Potrebbe apparire una richiesta di autorizzazione (è normale la prima volta).
+- Consiglio: abilitate “Reti private” e confermate.
+
+Problemi comuni (soluzioni rapide)
+
+A) Apro l’indirizzo ma non si vede nulla / pagina bianca
+- Chiudete e riaprite il browser.
+- Provate con un altro browser (Edge/Chrome).
+- Controllate di aver scritto esattamente: http://127.0.0.1:5000/
+
+B) Il browser dice “Impossibile raggiungere il sito”
+- Verificate che ConcastDashboard.exe sia ancora in esecuzione (icona vicino all’orologio).
+- Se non c’è l’icona, riavviate ConcastDashboard.exe.
+
+C) Ho già aperto la piattaforma e non posso avviarla di nuovo
+- È possibile che sia già in esecuzione.
+- Cercate l’icona vicino all’orologio e usate “Open (127.0.0.1:5000)”.
+- In alternativa chiudete con “Quit” e riavviate l’exe.
+
+D) Non vedo l’icona vicino all’orologio
+- Cliccate sulla freccia ^ (icone nascoste) e cercate l’icona del programma.
+
+Assistenza (per chi gestisce il PC)
+- Il programma salva un log tecnico qui:
+  %LOCALAPPDATA%\ConcastDashboard\logs\launcher.log

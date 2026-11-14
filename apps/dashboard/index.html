@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Energia - Analisi Consumi 2024-2025</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/charts.css">
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Caricamento dati...</p>
+    </div>
+
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link is-active">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2"><span class="co2-tree">🌳</span> CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link">MILP</a>
+                <a href="prodopti.html" class="app-nav__link">Shift produzione</a>
+            </div>
+            <div class="app-nav__meta"></div>
+        </div>
+    </nav>
+
+    <div class="dashboard-shell">
+        <aside class="filters-rail" aria-label="Filtri periodo e scenari">
+            <section class="time-filter filters-panel filters-panel--sticky">
+                <p class="eyebrow">Filtri</p>
+                <h2 class="filters-panel__title">Periodo &amp; Scenari</h2>
+                <div class="filter-group">
+                    <label for="year-select">Anno:</label>
+                    <select id="year-select">
+                        <!-- Le opzioni vengono popolate dinamicamente da JavaScript -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="month-select">Mese:</label>
+                    <select id="month-select">
+                        <option value="">Tutti i mesi</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="week-select">Settimana:</label>
+                    <select id="week-select" disabled>
+                        <option value="">Tutto il mese</option>
+                    </select>
+                </div>
+                <div class="filter-group checkbox-group">
+                    <label for="fv-optimized-checkbox" class="checkbox-label">
+                        <input type="checkbox" id="fv-optimized-checkbox">
+                        <span>Simulazione 3 impianti FV</span>
+                    </label>
+                </div>
+                <div class="filter-group checkbox-group">
+                    <label for="cogen-350-checkbox" class="checkbox-label">
+                        <input type="checkbox" id="cogen-350-checkbox">
+                        <span>Cogeneratore 350 kW</span>
+                    </label>
+                </div>
+            </section>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-container">
+
+                <!-- Enhanced Header with Clear Navigation -->
+                <header class="dashboard-header page-header">
+                    <div class="page-header__content">
+                        <p class="eyebrow">Panoramica energetica</p>
+                        <div class="header-title-group">
+                            <h1 class="header-title">Dashboard Energia</h1>
+                            <p class="header-subtitle">Analisi Consumi &amp; Produzione Energetica</p>
+                        </div>
+                        <p class="page-description">
+                            Monitoriamo fabbisogni, autoproduzione e opportunità di risparmio per anticipare decisioni
+                            operative e scenari di costo.
+                        </p>
+                        <div class="page-meta">
+                            <span class="meta-pill">Dati consolidati 2024-2025</span>
+                            <span class="meta-pill meta-pill--muted">Scenario Normal + FV12</span>
+                        </div>
+                    </div>
+                    <div class="page-header__actions">
+                        <div class="page-highlights">
+                            <p class="page-highlights__title">In questa pagina</p>
+                            <ul class="page-highlights__list">
+                                <li class="page-highlights__item">KPI consolidati di fabbisogni, costi e autoproduzione
+                                </li>
+                                <li class="page-highlights__item">Trend prezzi energia, coperture EE/FV/termico e
+                                    scenari FV12</li>
+                                <li class="page-highlights__item">Strategie simulate per ridurre costi e aumentare
+                                    autosufficienza</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <nav class="header-breadcrumb" aria-label="Breadcrumb">
+                        <span class="breadcrumb-item">Home</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item breadcrumb-item--active">Dashboard</span>
+                    </nav>
+                </header>
+
+                <!-- KPI Cards -->
+                <section class="kpi-section kpi-section--spaced">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">EE</div>
+                        <div class="kpi-content">
+                            <h3>Fabbisogno Elettrico</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-ee-totale">-</p>
+                                <p class="kpi-unit">kWh</p>
+                            </div>
+                            <p class="kpi-subtitle">Energia totale consumata dall'azienda</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">GEN</div>
+                        <div class="kpi-content">
+                            <h3>Energia Autoprodotta</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-autoprod">-</p>
+                                <p class="kpi-unit">kWh</p>
+                            </div>
+                            <p class="kpi-subtitle">Cogeneratore + Fotovoltaico</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">%</div>
+                        <div class="kpi-content">
+                            <h3>Tasso Autoproduzione</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-autosufficienza">-</p>
+                                <p class="kpi-unit">%</p>
+                            </div>
+                            <p class="kpi-subtitle">% energia NON acquistata dalla rete</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">€</div>
+                        <div class="kpi-content">
+                            <h3>Costo Totale Periodo</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-costo">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                            <p class="kpi-subtitle">EE acquistata + Gas + Manutenzione</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-content">
+                            <h3>Valore Autoproduzione</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-risparmio">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                            <p class="kpi-subtitle">Costo evitato NON comprando dalla rete</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione Prezzi & Mercati -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Prezzi & Mercati</h2>
+                        <p>Andamento prezzi energia elettrica e gas</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-prezzi"></canvas>
+                    </div>
+                </section>
+
+                <!-- Sezione Fabbisogni & Produzione EE -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Fabbisogni & Produzione Elettrica</h2>
+                        <p>Copertura fabbisogno: Cogeneratore, Fotovoltaico, Acquisti rete</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-ee"></canvas>
+                    </div>
+                    <div class="chart-legend" id="legend-ee"></div>
+                </section>
+
+                <!-- Sezione Analisi Risparmio Fotovoltaico Ottimizzato -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Analisi Risparmio Fotovoltaico Ottimizzato</h2>
+                        <p class="chart-description">
+                            <strong>Come leggere il grafico:</strong> Confronto produzione fotovoltaico tra scenario
+                            normale e 3 impianti FV.<br>
+                            <span class="scenario-desc">
+                                <span class="color-box" style="background-color: #3b82f6;"></span>
+                                <strong>Produzione Normal</strong> - Cogeneratore + Fotovoltaico base
+                            </span><br>
+                            <span class="scenario-desc">
+                                <span class="color-box" style="background-color: #fbbf24;"></span>
+                                <strong>Produzione FV12</strong> - Cogeneratore + 3 impianti FV
+                            </span><br>
+                            <em>La differenza mostra l'energia aggiuntiva prodotta con 3 impianti FV.</em>
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-fv-savings"></canvas>
+                    </div>
+                    <div class="chart-legend" id="legend-fv-savings"></div>
+                </section>
+
+                <!-- Sezione Fabbisogni Termici -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Fabbisogni & Produzione Termica</h2>
+                        <p>Copertura fabbisogno acqua calda: Cogeneratore e Caldaie (pattern tratteggiato)</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-termico"></canvas>
+                    </div>
+                    <div class="chart-legend" id="legend-termico"></div>
+                </section>
+
+                <!-- Sezione Analisi Strategie Ottimizzazione -->
+                <section class="strategies-section">
+                    <div class="section-header">
+                        <h2>Analisi Strategie Ottimizzazione</h2>
+                        <p>Confronto costi attuali vs strategie simulate per trovare l'ottimizzazione migliore</p>
+                    </div>
+
+                    <!-- Grid grafici comparativi -->
+                    <div class="strategies-grid">
+                        <div class="strategy-chart-item">
+                            <h3 class="chart-subtitle">Attuale vs Coge Spento</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-spento"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-spento"></div>
+                        </div>
+                        <div class="strategy-chart-item">
+                            <h3 class="chart-subtitle">Attuale vs Coge Minimo</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-minimo"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-minimo"></div>
+                        </div>
+                        <div class="strategy-chart-item">
+                            <h3 class="chart-subtitle">Attuale vs Ins Elettrico</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-elettrico"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-elettrico"></div>
+                        </div>
+                        <div class="strategy-chart-item">
+                            <h3 class="chart-subtitle">Attuale vs Coge Massimo</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-massimo"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-massimo"></div>
+                        </div>
+                        <div class="strategy-chart-item">
+                            <h3 class="chart-subtitle">Attuale vs Ins Termico</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-termico"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-termico"></div>
+                        </div>
+                        <div class="strategy-chart-item best-strategy">
+                            <h3 class="chart-subtitle">🏆 BEST: Attuale vs Strategia Ottimale</h3>
+                            <div class="chart-container">
+                                <canvas id="chart-strategy-best"></canvas>
+                            </div>
+                            <div class="chart-legend" id="legend-strategy-best"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione KPI Strategie -->
+                <section class="strategy-kpi-section">
+                    <div class="section-header">
+                        <h2>KPI Strategie & Analisi Ottimizzazione</h2>
+                        <p>Metriche chiave per valutare le diverse strategie di gestione del cogeneratore</p>
+                    </div>
+
+                    <!-- KPI Cards Totali Periodo -->
+                    <div class="strategy-kpi-cards">
+                        <div class="kpi-card">
+                            <div class="kpi-icon">T</div>
+                            <div class="kpi-content">
+                                <h3>Periodo Analizzato</h3>
+                                <p class="kpi-value" id="strategy-kpi-periodo">-</p>
+                                <p class="kpi-unit">giorni</p>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">€</div>
+                            <div class="kpi-content">
+                                <h3>Costo Attuale</h3>
+                                <p class="kpi-value" id="strategy-kpi-attuale">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">OPT</div>
+                            <div class="kpi-content">
+                                <h3>Costo Minimo Possibile</h3>
+                                <p class="kpi-value" id="strategy-kpi-minimo">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">Δ</div>
+                            <div class="kpi-content">
+                                <h3>Risparmio Possibile</h3>
+                                <p class="kpi-value" id="strategy-kpi-risparmio">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon">±</div>
+                            <div class="kpi-content">
+                                <h3>Range Costi</h3>
+                                <p class="kpi-value" id="strategy-kpi-range">-</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout 2 Colonne: Barre + Risparmi -->
+                    <div class="strategy-analysis-grid">
+                        <!-- Colonna Sinistra: Barre Orizzontali -->
+                        <div class="optimal-strategy-bars">
+                            <h3>Strategia Ottimale per Tempo (%)</h3>
+                            <p class="section-subtitle">Percentuale di ore in cui ciascuna strategia risulta la più
+                                economica</p>
+                            <div id="optimal-strategy-container"></div>
+                        </div>
+
+                        <!-- Colonna Destra: KPI Risparmi -->
+                        <div class="strategy-savings-cards">
+                            <div class="savings-card">
+                                <h3>Risparmio vs Spento</h3>
+                                <p class="savings-value" id="savings-vs-spento">-</p>
+                                <p class="savings-desc">Risparmio usando la strategia migliore fissa rispetto a tenere
+                                    il coge spento</p>
+                            </div>
+                            <div class="savings-card">
+                                <h3>Coge-Opt vs Attuale</h3>
+                                <p class="savings-value" id="savings-opt-attuale">-</p>
+                                <p class="savings-desc">Differenza tra i costi reali e la strategia ottimale ora per ora
+                                </p>
+                            </div>
+                            <div class="savings-card savings-card--hidden">
+                                <h3>Coge-Opt vs Best</h3>
+                                <p class="savings-value" id="savings-opt-best">-</p>
+                                <p class="savings-desc">Gap tra la miglior strategia fissa e l&apos;ottimizzazione
+                                    oraria</p>
+                            </div>
+                            <div class="savings-card savings-card--wide highlight">
+                                <h3>Attuale vs Best</h3>
+                                <p class="savings-value" id="savings-attuale-best">-</p>
+                                <p class="savings-desc">Beneficio massimo combinando ottimizzazione oraria e la miglior
+                                    strategia fissa</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione Efficienza Impianti -->
+                <section class="efficiency-section">
+                    <div class="section-header">
+                        <h2>Performance Cogeneratore</h2>
+                        <p>Quanto efficacemente il cogeneratore trasforma il gas in energia utile (elettrica + termica)
+                            rispetto alle specifiche tecniche del costruttore</p>
+                    </div>
+                    <div class="efficiency-grid">
+                        <div class="efficiency-card">
+                            <h3>Efficienza Elettrica</h3>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-nominal" style="width: 39.9%">
+                                    <span>Nominale: 39.9%</span>
+                                </div>
+                                <div class="efficiency-actual" id="eff-ee-actual" style="width: 0%">
+                                    <span id="eff-ee-value">-</span>
+                                </div>
+                            </div>
+                            <div class="efficiency-formula">
+                                <strong>Formula:</strong> (EE prodotta / Energia gas) × 100<br>
+                                <span id="eff-ee-calc" class="formula-calc">Calcolo: -</span>
+                            </div>
+                        </div>
+                        <div class="efficiency-card">
+                            <h3>Efficienza Termica</h3>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-nominal" style="width: 47.3%">
+                                    <span>Nominale: 47.3%</span>
+                                </div>
+                                <div class="efficiency-actual" id="eff-term-actual" style="width: 0%">
+                                    <span id="eff-term-value">-</span>
+                                </div>
+                            </div>
+                            <div class="efficiency-formula">
+                                <strong>Formula:</strong> (AC prodotto / Energia gas) × 100<br>
+                                <span id="eff-term-calc" class="formula-calc">Calcolo: -</span>
+                            </div>
+                        </div>
+                        <div class="efficiency-card">
+                            <h3>Efficienza Totale</h3>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-nominal" style="width: 87.2%">
+                                    <span>Nominale: 87.2%</span>
+                                </div>
+                                <div class="efficiency-actual" id="eff-tot-actual" style="width: 0%">
+                                    <span id="eff-tot-value">-</span>
+                                </div>
+                            </div>
+                            <div class="efficiency-formula">
+                                <strong>Formula:</strong> Eff. Elettrica + Eff. Termica<br>
+                                <span id="eff-tot-calc" class="formula-calc">Calcolo: -</span>
+                            </div>
+                        </div>
+                        <div class="efficiency-card">
+                            <h3>Ore Funzionamento</h3>
+                            <p class="big-number" id="ore-funz">-</p>
+                            <p class="small-label">ore equivalenti</p>
+                            <div class="efficiency-formula">
+                                <strong>Formula:</strong> EE prodotta / Potenza max<br>
+                                <span id="ore-funz-calc" class="formula-calc">Calcolo: -</span>
+                            </div>
+                        </div>
+                        <div class="efficiency-card">
+                            <h3>Fattore di Carico</h3>
+                            <p class="big-number" id="fattore-carico">-</p>
+                            <p class="small-label">% tempo funzionamento</p>
+                            <div class="efficiency-formula">
+                                <strong>Formula:</strong> (Ore funz / Ore periodo) × 100<br>
+                                <span id="fattore-carico-calc" class="formula-calc">Calcolo: -</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sezione Confronto Variazione MIN Potenza Cogeneratore -->
+                <section class="comparison-section">
+                    <div class="comparison-header-compact">
+                        <div class="comparison-title-group">
+                            <h2>Variazione MIN Potenza Cogeneratore</h2>
+                            <div class="comparison-year-selector">
+                                <label for="comparison-year-select">Anno:</label>
+                                <select id="comparison-year-select" class="comparison-year-select">
+                                    <option value="2024">2024</option>
+                                    <option value="2025" selected>2025</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="comparison-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Anno:</span>
+                                <span class="summary-value" id="comparison-display-year">2025</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Ottimale:</span>
+                                <span class="summary-value" id="comparison-kpi-optimal-percentage">-</span>
+                                <span class="summary-label">%</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Costo Min:</span>
+                                <span class="summary-value" id="comparison-kpi-min-cost">-</span>
+                                <span class="summary-label">€</span>
+                            </div>
+                            <div class="summary-item highlight">
+                                <span class="summary-label">Risparmio:</span>
+                                <span class="summary-value" id="comparison-kpi-max-savings">-</span>
+                                <span class="summary-label">€</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabella principale - immediatamente scannabile -->
+                    <div class="comparison-main-table-wrapper">
+                        <table id="comparison-main-table" class="comparison-main-table">
+                            <thead>
+                                <tr>
+                                    <th>% MIN</th>
+                                    <th>kW</th>
+                                    <th>Attuale<br><span class="table-subtitle">(riferimento)</span></th>
+                                    <th>Ins. Elettrico</th>
+                                    <th>Ins. Termico</th>
+                                    <th>Costo Minimo</th>
+                                    <th>Risparmio<br><span class="table-subtitle">vs Attuale</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparison-main-table-body"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Grafico evoluzione -->
+                    <div class="comparison-chart-wrapper">
+                        <h3 class="comparison-chart-title">Evoluzione Costi per % MIN Potenza</h3>
+                        <div class="chart-container">
+                            <canvas id="chart-comparison-main"></canvas>
+                        </div>
+                        <div class="chart-legend" id="legend-comparison-main"></div>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="dashboard-footer">
+                    <p>Dashboard Energia - Dati 2024-2025 | Aggiornato: <span id="last-update"></span></p>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/dashboardAnimations.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/dataLoader.js"></script>
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/csvComparisonLoader.js"></script>
+    <script src="js/comparisonCharts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

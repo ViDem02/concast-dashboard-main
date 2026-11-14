@@ -1,0 +1,218 @@
+[
+  {
+    "year": 2025,
+    "month": 1,
+    "psv_close_usd": 4.41,
+    "psv_eur_per_mwh": 33.52,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 99.69,
+    "note": "Assumed = Feb 2025 due to missing data"
+  },
+  {
+    "year": 2025,
+    "month": 2,
+    "psv_close_usd": 4.41,
+    "psv_eur_per_mwh": 33.52,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 99.69,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 3,
+    "psv_close_usd": 4.14,
+    "psv_eur_per_mwh": 31.46,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 96.95,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 4,
+    "psv_close_usd": 4.39,
+    "psv_eur_per_mwh": 33.36,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 99.48,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 5,
+    "psv_close_usd": 4.66,
+    "psv_eur_per_mwh": 35.42,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 102.23,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 6,
+    "psv_close_usd": 4.37,
+    "psv_eur_per_mwh": 33.21,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 99.28,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 7,
+    "psv_close_usd": 4.65,
+    "psv_eur_per_mwh": 35.34,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 102.12,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 8,
+    "psv_close_usd": 4.88,
+    "psv_eur_per_mwh": 37.09,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 104.45,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 9,
+    "psv_close_usd": 4.58,
+    "psv_eur_per_mwh": 34.81,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 101.41,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "psv_close_usd": 4.6,
+    "psv_eur_per_mwh": 34.96,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 101.61,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 11,
+    "psv_close_usd": 4.89,
+    "psv_eur_per_mwh": 37.16,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 104.55,
+    "note": ""
+  },
+  {
+    "year": 2025,
+    "month": 12,
+    "psv_close_usd": 5.19,
+    "psv_eur_per_mwh": 39.44,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 107.59,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 1,
+    "psv_close_usd": 4.9,
+    "psv_eur_per_mwh": 37.24,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 104.65,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 2,
+    "psv_close_usd": 4.6,
+    "psv_eur_per_mwh": 34.96,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 101.61,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 3,
+    "psv_close_usd": 4.31,
+    "psv_eur_per_mwh": 32.76,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 98.68,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 4,
+    "psv_close_usd": 4.05,
+    "psv_eur_per_mwh": 30.78,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 96.04,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 5,
+    "psv_close_usd": 3.8,
+    "psv_eur_per_mwh": 28.88,
+    "scenario": "optimistic",
+    "pun_eur_per_mwh": 88.88,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 6,
+    "psv_close_usd": 4.03,
+    "psv_eur_per_mwh": 30.63,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 95.84,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 7,
+    "psv_close_usd": 4.27,
+    "psv_eur_per_mwh": 32.45,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 98.27,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 8,
+    "psv_close_usd": 4.47,
+    "psv_eur_per_mwh": 33.97,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 100.29,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 9,
+    "psv_close_usd": 4.26,
+    "psv_eur_per_mwh": 32.38,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 98.17,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 10,
+    "psv_close_usd": 4.52,
+    "psv_eur_per_mwh": 34.35,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 100.8,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 11,
+    "psv_close_usd": 4.25,
+    "psv_eur_per_mwh": 32.3,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 98.07,
+    "note": ""
+  },
+  {
+    "year": 2026,
+    "month": 12,
+    "psv_close_usd": 4.51,
+    "psv_eur_per_mwh": 34.28,
+    "scenario": "standard",
+    "pun_eur_per_mwh": 100.71,
+    "note": ""
+  }
+]

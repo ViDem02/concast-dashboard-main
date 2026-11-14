@@ -1,0 +1,298 @@
+/* Charts CSS - Stili per grafici minimalisti */
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Line Chart - per grafici a linee (prezzi) */
+.line-chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.line-chart-area {
+    flex: 1;
+    position: relative;
+    border-left: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+    margin: 20px;
+}
+
+.line-chart-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid-line {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    opacity: 0.5;
+}
+
+/* Area Chart - per grafici area stacked (fabbisogni EE) */
+.area-chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.area-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.3s;
+}
+
+.area-layer:hover {
+    opacity: 0.8;
+}
+
+/* Bar Chart - per grafici a barre (fabbisogni termici) */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 100%;
+    padding: 20px;
+    gap: 4px;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+}
+
+.bar-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    position: relative;
+}
+
+.bar-segment {
+    width: 80%;
+    transition: width 0.3s, opacity 0.3s;
+    cursor: pointer;
+}
+
+.bar-segment:hover {
+    width: 90%;
+    opacity: 0.8;
+}
+
+.bar-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* Tooltip per grafici */
+.chart-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.chart-tooltip.visible {
+    opacity: 1;
+}
+
+.chart-tooltip-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chart-tooltip-section {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.chart-tooltip-section:first-of-type {
+    margin-top: 6px;
+    border-top: none;
+}
+
+.chart-tooltip-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.chart-tooltip-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.chart-tooltip-label {
+    opacity: 0.9;
+}
+
+.chart-tooltip-value {
+    font-weight: 600;
+    margin-left: auto;
+}
+
+/* Leggenda grafici */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.legend-item:hover {
+    background: var(--bg-color);
+}
+
+.legend-item.inactive {
+    opacity: 0.4;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.legend-label {
+    color: var(--text-primary);
+}
+
+.legend-value {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-left: 4px;
+}
+
+/* Assi grafici */
+.chart-axis {
+    position: absolute;
+    display: flex;
+    align-items: center;
+}
+
+.chart-axis.y-axis {
+    left: -60px;
+    top: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chart-axis.x-axis {
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.axis-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: right;
+    padding-right: 8px;
+}
+
+.x-axis .axis-label {
+    text-align: center;
+    padding: 8px 0 0 0;
+    transform: rotate(-45deg);
+    transform-origin: top left;
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes growHeight {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--final-height);
+    }
+}
+
+.chart-animated {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.bar-segment {
+    animation: growHeight 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bar-label {
+        font-size: 0.65rem;
+    }
+    
+    .axis-label {
+        font-size: 0.7rem;
+    }
+    
+    .chart-legend {
+        gap: 12px;
+    }
+    
+    .legend-item {
+        font-size: 0.85rem;
+    }
+}

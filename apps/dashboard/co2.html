@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi CO₂ - Dashboard Energia</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/co2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2 is-active"><span class="co2-tree">🌳</span>
+                    CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link">MILP</a>
+                <a href="prodopti.html" class="app-nav__link">Prod</a>
+            </div>
+            <div class="app-nav__meta">
+                <span class="app-pill">Dataset 2024-2026</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="dashboard-shell">
+        <main class="dashboard-main" style="grid-column: 1 / -1;">
+            <div class="dashboard-container">
+
+                <!-- Page Header -->
+                <header class="page-header">
+                    <div class="page-header__content">
+                        <p class="eyebrow">Sostenibilità & Impatto</p>
+                        <div class="header-title-group">
+                            <h1 class="header-title">Analisi CO₂</h1>
+                            <p class="header-subtitle">Impatto ambientale e risparmio generato dall'ottimizzazione
+                                fotovoltaica</p>
+                        </div>
+                        <p class="page-description">
+                            Confronto delle emissioni tra scenario Normal e scenario con 3 impianti fotovoltaici (FV12)
+                            per gli anni 2024-2026.
+                        </p>
+                        <div class="page-meta">
+                            <span class="meta-pill">Cumulato 2024-2026</span>
+                            <span class="meta-pill meta-pill--muted">Normal vs FV12</span>
+                        </div>
+                    </div>
+                    <div class="page-header__actions">
+                        <div class="kpi-badge-large">
+                            <span class="kpi-label">Totale CO₂ Evitata</span>
+                            <span class="kpi-value-large" id="total-saved-kpi">--</span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Loading & Error States -->
+                <div id="co2-loading" class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Caricamento dati in corso...</p>
+                </div>
+
+                <div id="co2-error" class="error-state" style="display: none;"></div>
+
+                <!-- Yearly Breakdown Grid -->
+                <section class="co2-yearly-section">
+                    <div class="section-header">
+                        <h2>Dettaglio Annuale Consumi ed Emissioni</h2>
+                        <p>Consumi energetici e impatto CO₂ per ogni anno</p>
+                    </div>
+                    <div id="yearly-grid" class="yearly-grid">
+                        <!-- Cards injected via JS -->
+                    </div>
+                </section>
+
+                <!-- Real World Impact Section -->
+                <section class="co2-impact-section">
+                    <div class="section-header">
+                        <h2>Impatto Reale Cumulato (2024-2026)</h2>
+                        <p>La riduzione di <strong><span id="impact-total-co2">--</span> tonnellate</strong> di CO₂
+                            ottenuta grazie ai 3 impianti fotovoltaici equivale a:</p>
+                    </div>
+                    <div id="equivalents-grid" class="equivalents-grid">
+                        <!-- Equivalent cards injected via JS -->
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/co2.js"></script>
+</body>
+
+</html>

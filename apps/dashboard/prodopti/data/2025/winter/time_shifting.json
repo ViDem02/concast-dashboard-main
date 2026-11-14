@@ -1,0 +1,787 @@
+{
+  "phases": {
+    "b_burr": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "b_burr_shift_1",
+          "original_start": {
+            "day": 0,
+            "hour": 7,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 8,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 2,
+          "name": "b_burr_shift_2",
+          "original_start": {
+            "day": 0,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 14,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 13,
+            "minute": 30
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 3,
+          "name": "b_burr_shift_3",
+          "original_start": {
+            "day": 1,
+            "hour": 7,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 1,
+            "hour": 8,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 4,
+          "name": "b_burr_shift_4",
+          "original_start": {
+            "day": 1,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 13,
+            "minute": 30
+          },
+          "shifted_start": {
+            "day": 1,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 13,
+            "minute": 0
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 5,
+          "name": "b_burr_shift_5",
+          "original_start": {
+            "day": 2,
+            "hour": 9,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 10,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 6,
+          "name": "b_burr_shift_6",
+          "original_start": {
+            "day": 2,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 15,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 14,
+            "minute": 30
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 7,
+          "name": "b_burr_shift_7",
+          "original_start": {
+            "day": 3,
+            "hour": 8,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 3,
+            "hour": 8,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 8,
+          "name": "b_burr_shift_8",
+          "original_start": {
+            "day": 3,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 14,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 3,
+            "hour": 12,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 14,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 9,
+          "name": "b_burr_shift_9",
+          "original_start": {
+            "day": 4,
+            "hour": 9,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 4,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 4,
+            "hour": 9,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 4,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        }
+      ]
+    },
+    "b_conf": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "b_conf_shift_1",
+          "original_start": {
+            "day": 0,
+            "hour": 8,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 8,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 2,
+          "name": "b_conf_shift_2",
+          "original_start": {
+            "day": 0,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 14,
+            "minute": 45
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 14,
+            "minute": 15
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 3,
+          "name": "b_conf_shift_3",
+          "original_start": {
+            "day": 1,
+            "hour": 7,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 1,
+            "hour": 8,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 4,
+          "name": "b_conf_shift_4",
+          "original_start": {
+            "day": 1,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 14,
+            "minute": 45
+          },
+          "shifted_start": {
+            "day": 1,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 14,
+            "minute": 15
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 5,
+          "name": "b_conf_shift_5",
+          "original_start": {
+            "day": 2,
+            "hour": 9,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 10,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 6,
+          "name": "b_conf_shift_6",
+          "original_start": {
+            "day": 2,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 15,
+            "minute": 30
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 15,
+            "minute": 0
+          },
+          "shift_minutes": -30
+        },
+        {
+          "id": 7,
+          "name": "b_conf_shift_7",
+          "original_start": {
+            "day": 3,
+            "hour": 8,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 3,
+            "hour": 8,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 12,
+            "minute": 30
+          },
+          "shift_minutes": 30
+        },
+        {
+          "id": 8,
+          "name": "b_conf_shift_8",
+          "original_start": {
+            "day": 3,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 14,
+            "minute": 45
+          },
+          "shifted_start": {
+            "day": 3,
+            "hour": 12,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 14,
+            "minute": 15
+          },
+          "shift_minutes": -30
+        }
+      ]
+    },
+    "b_past": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "b_past_shift_1",
+          "original_start": {
+            "day": 0,
+            "hour": 6,
+            "minute": 45
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 8,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 4,
+            "minute": 45
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 6,
+            "minute": 0
+          },
+          "shift_minutes": -120
+        },
+        {
+          "id": 2,
+          "name": "b_past_shift_2",
+          "original_start": {
+            "day": 0,
+            "hour": 10,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 0,
+            "hour": 15,
+            "minute": 30
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 10,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 0,
+            "hour": 15,
+            "minute": 30
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 3,
+          "name": "b_past_shift_3",
+          "original_start": {
+            "day": 1,
+            "hour": 7,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 13,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 1,
+            "hour": 9,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 15,
+            "minute": 0
+          },
+          "shift_minutes": 120
+        },
+        {
+          "id": 4,
+          "name": "b_past_shift_4",
+          "original_start": {
+            "day": 2,
+            "hour": 9,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 14,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 10,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 15,
+            "minute": 0
+          },
+          "shift_minutes": 60
+        },
+        {
+          "id": 5,
+          "name": "b_past_shift_5",
+          "original_start": {
+            "day": 4,
+            "hour": 12,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 4,
+            "hour": 19,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 4,
+            "hour": 10,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "shift_minutes": -120
+        }
+      ]
+    },
+    "s_finit": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "s_finit_shift_2",
+          "original_start": {
+            "day": 4,
+            "hour": 3,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 4,
+            "hour": 3,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 4,
+            "hour": 17,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 2,
+          "name": "s_finit_shift_3",
+          "original_start": {
+            "day": 5,
+            "hour": 1,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 5,
+            "hour": 10,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 5,
+            "hour": 1,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 5,
+            "hour": 10,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 3,
+          "name": "s_finit_shift_1",
+          "original_start": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 6,
+            "hour": 22,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 22,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        }
+      ]
+    },
+    "s_hiro": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "s_hiro_shift_1",
+          "original_start": {
+            "day": 0,
+            "hour": 7,
+            "minute": 45
+          },
+          "original_end": {
+            "day": 1,
+            "hour": 3,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 7,
+            "minute": 45
+          },
+          "shifted_end": {
+            "day": 1,
+            "hour": 3,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 2,
+          "name": "s_hiro_shift_2",
+          "original_start": {
+            "day": 2,
+            "hour": 5,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 3,
+            "hour": 4,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 5,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 3,
+            "hour": 4,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 3,
+          "name": "s_hiro_shift_3",
+          "original_start": {
+            "day": 4,
+            "hour": 9,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 5,
+            "hour": 8,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 4,
+            "hour": 9,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 5,
+            "hour": 8,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        }
+      ]
+    },
+    "s_torre": {
+      "shifts": [
+        {
+          "id": 1,
+          "name": "s_torre_shift_1",
+          "original_start": {
+            "day": 0,
+            "hour": 6,
+            "minute": 30
+          },
+          "original_end": {
+            "day": 2,
+            "hour": 13,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 0,
+            "hour": 6,
+            "minute": 30
+          },
+          "shifted_end": {
+            "day": 2,
+            "hour": 13,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        },
+        {
+          "id": 2,
+          "name": "s_torre_shift_2",
+          "original_start": {
+            "day": 2,
+            "hour": 15,
+            "minute": 0
+          },
+          "original_end": {
+            "day": 5,
+            "hour": 18,
+            "minute": 0
+          },
+          "shifted_start": {
+            "day": 2,
+            "hour": 15,
+            "minute": 0
+          },
+          "shifted_end": {
+            "day": 5,
+            "hour": 18,
+            "minute": 0
+          },
+          "shift_minutes": 0
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "optimization_id": 8,
+    "reference_week_start": "2025-02-02",
+    "reference_week_end": "2025-02-08",
+    "initial_cost_euros": 0.0,
+    "optimized_cost_euros": 0.0,
+    "cost_savings_euros": 0.0,
+    "cost_savings_percent": 0.0
+  }
+}

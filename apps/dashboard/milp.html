@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILP - Bilanci Energetici</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/charts.css">
+</head>
+
+<body>
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2"><span class="co2-tree">🌳</span> CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link is-active">MILP</a>
+                <a href="prodopti.html" class="app-nav__link">Prod</a>
+            </div>
+            <div class="app-nav__meta">
+                <span class="app-pill" id="milp-dataset-range">Dataset MILP</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <header class="page-header page-header--single">
+            <div class="hero-shell">
+                <div class="hero-top">
+                    <div>
+                        <p class="eyebrow">Ottimizzazione oraria</p>
+                        <h1 class="hero-title">MILP</h1>
+                        <p class="hero-sub">Dal CSV ai KPI: percorso visivo e dati chiave.</p>
+                    </div>
+                    <div class="hero-badges">
+                        <span class="meta-pill meta-pill--muted">Fonte: "risultati milp"</span>
+                        <span class="meta-pill" id="milp-dataset-range-hero">Dataset</span>
+                        <span class="meta-pill" id="hero-horizon">--</span>
+                    </div>
+                </div>
+                <div class="hero-metrics">
+                    <div class="hero-chip">
+                        <p class="chip-label">Copertura</p>
+                        <p class="chip-value" id="hero-autoprod-share">--</p>
+                    </div>
+                    <div class="hero-chip">
+                        <p class="chip-label">Risparmio</p>
+                        <p class="chip-value" id="hero-savings-share">--</p>
+                    </div>
+                    <div class="hero-chip">
+                        <p class="chip-label">Domanda</p>
+                        <p class="chip-value" id="hero-demand">--</p>
+                    </div>
+                    <div class="hero-chip">
+                        <p class="chip-label">Rete</p>
+                        <p class="chip-value" id="hero-grid">--</p>
+                    </div>
+                    <div class="hero-chip">
+                        <p class="chip-label">Coge</p>
+                        <p class="chip-value" id="hero-coge">--</p>
+                    </div>
+                    <div class="hero-chip">
+                        <p class="chip-label">Righe</p>
+                        <p class="chip-value" id="hero-hours">--</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="section-shell page-controls" aria-label="Selettori MILP">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label for="milp-horizon-select" class="input-label">Orizzonte</label>
+                    <select id="milp-horizon-select" class="input-select">
+                        <option value="hourly" selected>Orario</option>
+                        <option value="daily">Giornaliero</option>
+                        <option value="weekly">Settimanale</option>
+                        <option value="monthly">Mensile</option>
+                    </select>
+                </div>
+                <div class="filter-hint">
+                    <span class="meta-pill meta-pill--muted">CSV: risultati milp/ANNO/ORIZZONTE</span>
+                    <span class="meta-pill meta-pill--muted">Cut-off: Gen 2024 -> Set 2025</span>
+                </div>
+            </div>
+            <p class="page-note" id="ai-error" style="display:none;color:#ef4444;">Errore nel caricamento dei dati MILP. Verifica i CSV.</p>
+        </section>
+
+        <section class="section-shell" aria-label="Visualizzazione processo MILP">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Processo</p>
+                    <h2>Input -> Solver -> Output</h2>
+                </div>
+            </div>
+            <div class="flow-ribbon">
+                <article class="flow-card">
+                    <div class="flow-icon">⏱️</div>
+                    <p class="flow-title">Input</p>
+                    <div class="chip-row">
+                        <span class="pill">Domanda</span>
+                        <span class="pill">Setpoint</span>
+                        <span class="pill">Rete</span>
+                        <span class="pill">Costo</span>
+                    </div>
+                </article>
+                <article class="flow-card">
+                    <div class="flow-icon flow-icon--pulse">⚙️</div>
+                    <p class="flow-title">Solver MILP</p>
+                    <div class="constraint-dots">
+                        <span>Domanda = rete + coge</span>
+                        <span>Limiti setpoint</span>
+                        <span>Costi gas/PUN</span>
+                        <span>Autoproduzione</span>
+                    </div>
+                </article>
+                <article class="flow-card">
+                    <div class="flow-icon">🚀</div>
+                    <p class="flow-title">Output</p>
+                    <div class="mini-metrics-row">
+                        <div class="mini-metric">
+                            <span class="mini-label">Copertura</span>
+                            <span class="mini-value" id="milp-process-autoprod">--</span>
+                        </div>
+                        <div class="mini-metric">
+                            <span class="mini-label">Risparmio</span>
+                            <span class="mini-value" id="milp-process-savings">--</span>
+                        </div>
+                        <div class="mini-metric">
+                            <span class="mini-label">Righe</span>
+                            <span class="mini-value" id="milp-process-hours">--</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="process-track" aria-label="Pipeline MILP">
+            </div>
+        </section>
+
+        <section class="section-shell" aria-label="Come funziona il MILP">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Come lavora il modello</p>
+                    <h2>Dal CSV al percorso ottimo</h2>
+                    <p class="section-subtitle">Una lettura rapida di vincoli, obiettivo e script Python che costruiscono il problema.</p>
+                </div>
+            </div>
+            <div class="milp-explainer">
+                <article class="milp-explainer__card">
+                    <div class="milp-explainer__title">Pipeline solver</div>
+                    <ul class="milp-steps">
+                        <li>
+                            <div class="step-dot">1</div>
+                            <div>
+                                <p class="step-title">Ingestione</p>
+                                <p class="step-copy">Legge il CSV orario (domanda, setpoint, PUN, gas) e normalizza i campi.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-dot">2</div>
+                            <div>
+                                <p class="step-title">Costruzione MILP</p>
+                                <p class="step-copy">Definisce variabili di decisione (rete, coge, caldaie), vincoli di bilancio e limiti tecnici.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-dot">3</div>
+                            <div>
+                                <p class="step-title">Obiettivo</p>
+                                <p class="step-copy">Minimizza il costo totale (gas + PUN) garantendo la copertura del fabbisogno.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="step-dot">4</div>
+                            <div>
+                                <p class="step-title">Output</p>
+                                <p class="step-copy">Scrive CSV ottimizzato + report.txt e calcola copertura, risparmio, ore valide.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+                <article class="milp-explainer__card milp-explainer__card--code">
+                    <div class="milp-explainer__title">Script Python coinvolti</div>
+                    <div class="script-grid">
+                        <div class="script-chip">
+                            <span class="script-name">data-pipeline/*</span>
+                            <span class="script-desc">Parsing e normalizzazione consumi/prezzi.</span>
+                        </div>
+                        <div class="script-chip">
+                            <span class="script-name">services/forecasting/*.py</span>
+                            <span class="script-desc">Stime PUN/PSV e scenari di mercato.</span>
+                        </div>
+                        <div class="script-chip">
+                            <span class="script-name">risultati milp/*/report.txt</span>
+                            <span class="script-desc">Log solver con costi e convergenza.</span>
+                        </div>
+                        <div class="script-chip">
+                            <span class="script-name">risultati milp/*/risultato_ottimizzazione.csv</span>
+                            <span class="script-desc">Soluzione ottimale: rete, coge, boiler per ogni ora.</span>
+                        </div>
+                    </div>
+                    <p class="milp-footnote">Suggerimento: apri il report.txt per seguire i vincoli attivi e la riduzione del gap.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-shell" aria-label="Metriche MILP">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Snapshot</p>
+                    <h2>Energia e costi</h2>
+                </div>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <p class="summary-label">Copertura interna</p>
+                    <p class="summary-value" id="summary-autoprod-share">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Risparmio</p>
+                    <p class="summary-value" id="summary-savings-share">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Domanda</p>
+                    <p class="summary-value" id="summary-demand">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Rete</p>
+                    <p class="summary-value" id="summary-grid">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Coge</p>
+                    <p class="summary-value" id="summary-coge">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Costo ottimizzato</p>
+                    <p class="summary-value" id="summary-optcost">--</p>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-label">Costo storico</p>
+                    <p class="summary-value" id="summary-origcost">--</p>
+                </div>
+                <div class="summary-card summary-card--delta">
+                    <p class="summary-label">Delta</p>
+                    <p class="summary-value" id="summary-delta">--</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-shell">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Report e allegati</p>
+                    <h2>CSV + log solver</h2>
+                </div>
+            </div>
+            <div class="materials-grid">
+                <div class="report-card">
+                    <div class="report-card__header">
+                        <div>
+                            <p class="eyebrow">Sintesi</p>
+                            <h3>Report ottimizzazione</h3>
+                        </div>
+                        <div class="report-actions">
+                            <a id="milp-csv-link" class="ghost-link" target="_blank" rel="noopener">Apri CSV</a>
+                            <a id="milp-report-link" class="ghost-link" target="_blank" rel="noopener">Apri
+                                report.txt</a>
+                        </div>
+                    </div>
+                    <pre id="milp-report"
+                        class="report-card__body">Report combinato di tutti gli anni disponibili per l'orizzonte selezionato.</pre>
+                </div>
+                <div class="materials-side">
+                    <div class="materials-datasets">
+                        <div class="materials-datasets__header">
+                            <div>
+                                <p class="eyebrow">Dataset disponibili</p>
+                                <h3>Anno per anno</h3>
+                            </div>
+                            <span class="meta-pill" id="milp-datasets-count">- dataset</span>
+                        </div>
+                        <div id="milp-datasets-list" class="materials-datasets__list">
+                            <p class="page-note">Caricamento dataset MILP...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>MILP Energy Insights | Aggiornato: <span id="ai-last-update"></span></p>
+        </footer>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/aiChallenge.js"></script>
+</body>
+
+</html>

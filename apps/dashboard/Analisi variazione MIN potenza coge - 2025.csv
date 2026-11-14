@@ -1,0 +1,197 @@
+0.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"180.101,13 €","180.739,78 €",,,
+,Risparmio possibile,"44.893,73 €","45.052,93 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"24,1%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"27,5%"
+,Costo coge minimo,"817.988,59 €","820.889,25 €","82088925,5%",Coge minimo,"24,3%"
+,Costo coge ins. elettrico,"783.107,15 €","785.884,13 €","78588412,7%",Coge ins. elettrico,"55,6%"
+,Costo coge ins. Elettrico+,"785.962,63 €","788.749,74 €","82828006,7%",Coge ins. Elettrico+,"55,2%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"31,0%"
+,Costo coge ins. Termico,"761.925,51 €","764.627,37 €",,Coge ins. Termico,"67,1%"
+,Costo minimo,"751.774,57 €","754.440,44 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"6.688,43 €","6.712,15 €",,,
+,Coge-Opt vs attuale,"44.698,56 €","44.857,06 €",,,
+,Coge-Opt vs best,"31.332,58 €","31.443,69 €",,,
+,,,,,,
+10.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"171.081,50 €","171.688,17 €",,,
+,Risparmio possibile,"46.972,24 €","47.138,81 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"24,7%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"28,1%"
+,Costo coge minimo,"801.260,82 €","804.102,17 €","80410217,4%",Coge minimo,"57,7%"
+,Costo coge ins. elettrico,"783.109,83 €","785.886,81 €","78588681,3%",Coge ins. elettrico,"54,3%"
+,Costo coge ins. Elettrico+,"785.962,63 €","788.749,74 €","82828006,7%",Coge ins. Elettrico+,"53,9%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"29,6%"
+,Costo coge ins. Termico,"764.484,10 €","767.195,04 €",,Coge ins. Termico,"35,1%"
+,Costo minimo,"749.696,06 €","752.354,55 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"6.685,76 €","6.709,47 €",,,
+,Coge-Opt vs attuale,"46.777,07 €","46.942,95 €",,,
+,Coge-Opt vs best,"33.413,77 €","33.532,26 €",,,
+,,,,,,
+20.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"163.483,61 €","164.063,34 €",,,
+,Risparmio possibile,"49.858,98 €","50.035,79 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"25,0%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"28,4%"
+,Costo coge minimo,"786.508,59 €","789.297,62 €","78929762,5%",Coge minimo,"59,1%"
+,Costo coge ins. elettrico,"783.112,52 €","785.889,52 €","78588951,8%",Coge ins. elettrico,"53,0%"
+,Costo coge ins. Elettrico+,"785.962,63 €","788.749,74 €","82828006,7%",Coge ins. Elettrico+,"52,7%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"28,5%"
+,Costo coge ins. Termico,"764.877,94 €","767.590,27 €",,Coge ins. Termico,"34,9%"
+,Costo minimo,"746.809,32 €","749.457,58 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"6.683,06 €","6.706,76 €",,,
+,Coge-Opt vs attuale,"49.663,81 €","49.839,92 €",,,
+,Coge-Opt vs best,"36.303,20 €","36.431,94 €",,,
+,,,,,,
+30.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"163.273,55 €","163.852,53 €",,,
+,Risparmio possibile,"53.002,04 €","53.189,99 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"25,1%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"28,5%"
+,Costo coge minimo,"771.930,60 €","774.667,94 €","77466794,0%",Coge minimo,"60,7%"
+,Costo coge ins. elettrico,"783.112,52 €","785.889,52 €","78588951,8%",Coge ins. elettrico,"51,8%"
+,Costo coge ins. Elettrico+,"785.977,48 €","788.764,63 €","82828006,7%",Coge ins. Elettrico+,"51,5%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"27,2%"
+,Costo coge ins. Termico,"765.788,06 €","768.503,62 €",,Coge ins. Termico,"34,6%"
+,Costo minimo,"743.666,26 €","746.303,38 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"17.864,99 €","17.928,34 €",,,
+,Coge-Opt vs attuale,"52.806,86 €","52.994,12 €",,,
+,Coge-Opt vs best,"28.264,33 €","28.364,56 €",,,
+,,,,,,
+40.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"163.273,55 €","163.852,53 €",,,
+,Risparmio possibile,"53.002,04 €","53.189,99 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"25,1%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"28,5%"
+,Costo coge minimo,"771.930,60 €","774.667,94 €","77466794,0%",Coge minimo,"60,7%"
+,Costo coge ins. elettrico,"783.112,52 €","785.889,52 €","78588951,8%",Coge ins. elettrico,"51,8%"
+,Costo coge ins. Elettrico+,"785.977,48 €","788.764,63 €","82828006,7%",Coge ins. Elettrico+,"51,5%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"27,2%"
+,Costo coge ins. Termico,"765.788,06 €","768.503,62 €",,Coge ins. Termico,"34,6%"
+,Costo minimo,"743.666,26 €","746.303,38 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"17.864,99 €","17.928,34 €",,,
+,Coge-Opt vs attuale,"52.806,86 €","52.994,12 €",,,
+,Coge-Opt vs best,"28.264,33 €","28.364,56 €",,,
+,,,,,,
+50.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"177.949,11 €","178.580,13 €",,,
+,Risparmio possibile,"61.698,99 €","61.917,78 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"25,3%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"27,5%"
+,Costo coge minimo,"744.726,96 €","747.367,83 €","74736783,3%",Coge minimo,"77,3%"
+,Costo coge ins. elettrico,"783.181,72 €","785.958,96 €","78595895,6%",Coge ins. elettrico,"43,9%"
+,Costo coge ins. Elettrico+,"785.893,93 €","788.680,79 €","82828006,7%",Coge ins. Elettrico+,"43,9%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"19,6%"
+,Costo coge ins. Termico,"777.601,10 €","780.358,55 €",,Coge ins. Termico,"27,2%"
+,Costo minimo,"734.969,31 €","737.575,59 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"45.068,63 €","45.228,45 €",,,
+,Coge-Opt vs attuale,"61.503,81 €","61.721,91 €",,,
+,Coge-Opt vs best,"9.757,64 €","9.792,24 €",,,
+,,,,,,
+60.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"171.782,94 €","172.392,10 €",,,
+,Risparmio possibile,"40.744,90 €","40.889,39 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"54,8%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"62,0%"
+,Costo coge minimo,"818.329,83 €","821.231,71 €","82123170,8%",Coge minimo,"24,3%"
+,Costo coge ins. elettrico,"781.991,21 €","784.764,22 €","78476422,4%",Coge ins. elettrico,"63,3%"
+,Costo coge ins. Elettrico+,"785.640,49 €","788.426,45 €","82828006,7%",Coge ins. Elettrico+,"62,0%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"37,6%"
+,Costo coge ins. Termico,"782.300,95 €","785.075,07 €",,Coge ins. Termico,"58,6%"
+,Costo minimo,"755.923,40 €","758.603,98 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"7.804,38 €","7.832,06 €",,,
+,Coge-Opt vs attuale,"40.549,73 €","40.693,52 €",,,
+,Coge-Opt vs best,"26.067,80 €","26.160,24 €",,,
+,,,,,,
+70.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"171.782,94 €","172.392,10 €",,,
+,Risparmio possibile,"40.744,90 €","40.889,39 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"54,8%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"62,0%"
+,Costo coge minimo,"818.329,83 €","821.231,71 €","82123170,8%",Coge minimo,"24,3%"
+,Costo coge ins. elettrico,"781.991,21 €","784.764,22 €","78476422,4%",Coge ins. elettrico,"63,3%"
+,Costo coge ins. Elettrico+,"785.640,49 €","788.426,45 €","82828006,7%",Coge ins. Elettrico+,"62,0%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"37,6%"
+,Costo coge ins. Termico,"782.300,95 €","785.075,07 €",,Coge ins. Termico,"58,6%"
+,Costo minimo,"755.923,40 €","758.603,98 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"7.804,38 €","7.832,06 €",,,
+,Coge-Opt vs attuale,"40.549,73 €","40.693,52 €",,,
+,Coge-Opt vs best,"26.067,80 €","26.160,24 €",,,
+,,,,,,
+80.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"173.736,08 €","174.352,17 €",,,
+,Risparmio possibile,"40.741,77 €","40.886,24 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"54,8%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"62,0%"
+,Costo coge minimo,"799.262,21 €","802.096,48 €","80209647,6%",Coge minimo,"24,3%"
+,Costo coge ins. elettrico,"780.594,98 €","783.363,05 €","78336304,5%",Coge ins. elettrico,"64,9%"
+,Costo coge ins. Elettrico+,"782.253,19 €","785.027,13 €","82828006,7%",Coge ins. Elettrico+,"63,6%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"37,6%"
+,Costo coge ins. Termico,"798.771,20 €","801.603,72 €",,Coge ins. Termico,"58,6%"
+,Costo minimo,"755.926,53 €","758.607,12 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"9.200,61 €","9.233,23 €",,,
+,Coge-Opt vs attuale,"40.546,59 €","40.690,38 €",,,
+,Coge-Opt vs best,"24.668,44 €","24.755,92 €",,,
+,,,,,,
+90.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"175.027,52 €","175.648,18 €",,,
+,Risparmio possibile,"40.734,59 €","40.879,04 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"54,8%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"62,0%"
+,Costo coge minimo,"792.086,55 €","794.895,37 €","79489536,7%",Coge minimo,"24,6%"
+,Costo coge ins. elettrico,"780.227,23 €","782.993,99 €","78299399,0%",Coge ins. elettrico,"65,3%"
+,Costo coge ins. Elettrico+,"781.018,66 €","783.788,23 €","82828006,7%",Coge ins. Elettrico+,"64,6%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"37,6%"
+,Costo coge ins. Termico,"808.284,42 €","811.150,68 €",,Coge ins. Termico,"58,4%"
+,Costo minimo,"755.933,71 €","758.614,33 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"9.568,36 €","9.602,29 €",,,
+,Coge-Opt vs attuale,"40.539,42 €","40.683,17 €",,,
+,Coge-Opt vs best,"24.293,52 €","24.379,66 €",,,
+,,,,,,
+100.00%,Totale nel periodo,,,,,
+,Periodo [giorni],282,283,,,
+,Range costi,"174.894,70 €","175.514,89 €",,,
+,Risparmio possibile,"40.719,97 €","40.864,37 €",,Configurazione,Periodo di ottimo
+,Costo attuale,"796.473,13 €","799.297,50 €","79929750,1%",Attuale,"54,8%"
+,Costo coge spento,"789.795,59 €","792.596,28 €","79259628,0%",Coge spento,"62,1%"
+,Costo coge minimo,"785.962,63 €","788.749,74 €","78874973,6%",Coge minimo,"62,5%"
+,Costo coge ins. elettrico,"779.950,30 €","782.716,08 €","78271608,3%",Coge ins. elettrico,"66,2%"
+,Costo coge ins. Elettrico+,"780.359,20 €","783.126,43 €","82828006,7%",Coge ins. Elettrico+,"65,7%"
+,Costo coge massimo,"825.353,28 €","828.280,07 €",,Coge massimo,"38,3%"
+,Costo coge ins. Termico,"814.608,68 €","817.497,37 €",,Coge ins. Termico,"58,2%"
+,Costo minimo,"755.948,33 €","758.629,00 €",,,
+,,,,,,
+,,,,,,
+,Risparmio vs off,"9.845,28 €","9.880,20 €",,,
+,Coge-Opt vs attuale,"40.524,80 €","40.668,50 €",,,
+,Coge-Opt vs best,"24.001,97 €","24.087,08 €",,,

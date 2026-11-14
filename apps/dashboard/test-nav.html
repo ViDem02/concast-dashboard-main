@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Navigazione</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        /* Debug styles */
+        .app-nav__link {
+            border: 2px solid red !important;
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test Visibilità Link Navigazione</h1>
+
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link is-active">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link">CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+            </div>
+            <div class="app-nav__meta">
+                <span class="app-pill">Dataset 2024-2026</span>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding: 2rem; font-family: monospace;">
+        <h2>Dovresti vedere 4 link con bordo rosso:</h2>
+        <ol>
+            <li>Dashboard (attivo, blu)</li>
+            <li>Statistiche EE</li>
+            <li>CO₂ ← QUESTO DEVE ESSERE VISIBILE</li>
+            <li>Scenario 2026</li>
+        </ol>
+
+        <p>Se non vedi "CO₂", controlla:</p>
+        <ul>
+            <li>Console del browser (F12) per errori</li>
+            <li>Tab "Elements" per verificare se l'elemento esiste nel DOM</li>
+            <li>Tab "Network" per verificare se main.css si carica correttamente</li>
+        </ul>
+    </div>
+</body>
+
+</html>

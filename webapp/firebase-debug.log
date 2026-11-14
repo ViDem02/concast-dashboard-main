@@ -1,0 +1,56 @@
+[debug] [2025-11-15T10:22:36.089Z] ----------------------------------------------------------------------
+[debug] [2025-11-15T10:22:36.095Z] Command:       /Users/dev/.nvm/versions/node/v22.19.0/bin/node /Users/dev/.nvm/versions/node/v22.19.0/bin/firebase use --add
+[debug] [2025-11-15T10:22:36.096Z] CLI Version:   14.17.0
+[debug] [2025-11-15T10:22:36.096Z] Platform:      darwin
+[debug] [2025-11-15T10:22:36.096Z] Node Version:  v22.19.0
+[debug] [2025-11-15T10:22:36.096Z] Time:          Sat Nov 15 2025 11:22:36 GMT+0100 (Central European Standard Time)
+[debug] [2025-11-15T10:22:36.096Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-15T10:22:36.227Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-15T10:22:36.227Z] > authorizing via signed-in user (aledevidy@gmail.com)
+[debug] [2025-11-15T10:22:36.228Z] Checked if tokens are valid: true, expires at: 1763205456464
+[debug] [2025-11-15T10:22:36.228Z] Checked if tokens are valid: true, expires at: 1763205456464
+[debug] [2025-11-15T10:22:36.229Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-15T10:22:36.875Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-15T10:22:36.875Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-11-15T10:22:42.115Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/dev/.nvm/versions/node/v22.19.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:519:28)
+    at Interface.emit (node:domain:489:12)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1132:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:271:20)
+    at ReadStream.emit (node:events:531:35)
+    at ReadStream.emit (node:domain:489:12)
+    at emitKeys (node:internal/readline/utils:370:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2025-11-15T10:23:14.317Z] ----------------------------------------------------------------------
+[debug] [2025-11-15T10:23:14.322Z] Command:       /Users/dev/.nvm/versions/node/v22.19.0/bin/node /Users/dev/.nvm/versions/node/v22.19.0/bin/firebase use --add
+[debug] [2025-11-15T10:23:14.323Z] CLI Version:   14.17.0
+[debug] [2025-11-15T10:23:14.323Z] Platform:      darwin
+[debug] [2025-11-15T10:23:14.323Z] Node Version:  v22.19.0
+[debug] [2025-11-15T10:23:14.323Z] Time:          Sat Nov 15 2025 11:23:14 GMT+0100 (Central European Standard Time)
+[debug] [2025-11-15T10:23:14.323Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-15T10:23:14.429Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-15T10:23:14.430Z] > authorizing via signed-in user (aledevidy@gmail.com)
+[debug] [2025-11-15T10:23:14.431Z] Checked if tokens are valid: true, expires at: 1763205456464
+[debug] [2025-11-15T10:23:14.431Z] Checked if tokens are valid: true, expires at: 1763205456464
+[debug] [2025-11-15T10:23:14.431Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-15T10:23:15.068Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-15T10:23:15.069Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-11-15T10:23:22.035Z] ExitPromptError: User force closed the prompt with SIGINT
+    at Interface.sigint (/Users/dev/.nvm/versions/node/v22.19.0/lib/node_modules/firebase-tools/node_modules/@inquirer/core/dist/commonjs/lib/create-prompt.js:101:37)
+    at Interface.emit (node:events:519:28)
+    at Interface.emit (node:domain:489:12)
+    at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1132:18)
+    at ReadStream.onkeypress (node:internal/readline/interface:271:20)
+    at ReadStream.emit (node:events:531:35)
+    at ReadStream.emit (node:domain:489:12)
+    at emitKeys (node:internal/readline/utils:370:14)
+    at emitKeys.next (<anonymous>)
+    at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+[error] 
+[error] Error: An unexpected error has occurred.

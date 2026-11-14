@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiche Giornaliere - Fabbisogno Elettrico</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/charts.css">
+</head>
+
+<body>
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link">Dashboard</a>
+                <a href="stats.html" class="app-nav__link is-active">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2"><span class="co2-tree">🌳</span> CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link">MILP</a>
+            </div>
+            <div class="app-nav__meta">
+                <span class="app-pill">Dataset 2024-2026</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Enhanced Header -->
+        <header class="page-header stats-header">
+            <div class="page-header__content">
+                <p class="eyebrow">Analisi giornaliera</p>
+                <div class="header-title-group">
+                    <h1 class="header-title">Statistiche giornaliere</h1>
+                    <p class="header-subtitle">Fabbisogno elettrico aziendale</p>
+                </div>
+                <p class="page-description">Media, mediana, deviazione e pattern settimanali per anticipare picchi e
+                    anomalie.</p>
+                <div class="page-meta">
+                    <span class="meta-pill">Periodo 2024-2025</span>
+                    <span class="meta-pill meta-pill--muted">Scenari Normal &amp; FV12</span>
+                </div>
+            </div>
+            <div class="page-header__actions">
+                <div class="page-highlights">
+                    <p class="page-highlights__title">Cosa trovi qui</p>
+                    <ul class="page-highlights__list">
+                        <li class="page-highlights__item">Distribuzioni giornaliere con media, mediana e deviazione</li>
+                        <li class="page-highlights__item">Grafico dei fabbisogni giornalieri e tabella dettagliata per
+                            data</li>
+                        <li class="page-highlights__item">Confronto immediato fra dataset Normal e FV12</li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="filters-panel page-controls" aria-label="Filtri pagina Statistiche">
+            <div class="filter-group">
+                <label for="stats-version-select" class="input-label">Versione dati</label>
+                <select id="stats-version-select" title="Versione dati" class="input-select">
+                    <option value="normal" selected>Normal</option>
+                    <option value="fv12">FV12 (3 impianti)</option>
+                </select>
+            </div>
+            <p class="page-note">La selezione aggiorna grafici e tabelle con i valori medi storici o lo scenario
+                fotovoltaico ottimizzato.</p>
+        </section>
+
+        <!-- CORE: Raggruppamento per Giorno della Settimana (in cima) -->
+        <section class="strategies-section">
+            <div class="section-header">
+                <h2>Raggruppamento per Giorno della Settimana</h2>
+                <p>Dati core: media, mediana, deviazione standard, min, max e N</p>
+            </div>
+            <div class="comparison-main-table-wrapper">
+                <table class="comparison-main-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left;">Giorno</th>
+                            <th style="text-align:right;">Media<br><small>(statistiche generali)</small></th>
+                            <th style="text-align:right;">Mediana<br><small>(statistiche generali)</small></th>
+                            <th style="text-align:right;">Dev. Std<br><small>(statistiche generali)</small></th>
+                            <th style="text-align:right;">Min<br><small>(statistiche generali)</small></th>
+                            <th style="text-align:right;">Max<br><small>(statistiche generali)</small></th>
+                            <th style="text-align:right;">N<br><small>(conteggio giorni)</small></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-dow-body"></tbody>
+                </table>
+            </div>
+            <div class="chart-section" style="margin-top: 16px;">
+                <div class="section-header" style="margin-bottom: 8px;">
+                    <h2 style="font-size: 1.25rem;">Sintesi per giorno (colonna+linea)</h2>
+                    <p>Una colonna per giorno (media) e linea della mediana</p>
+                </div>
+                <div class="chart-container" style="height: 320px;">
+                    <canvas id="chart-dow-summary"></canvas>
+                </div>
+                <div class="chart-legend" id="legend-dow-summary"></div>
+            </div>
+        </section>
+
+        <!-- KPI Table (compact) -->
+        <section class="kpi-section" style="padding-top: 0;">
+            <div class="comparison-main-table-wrapper">
+                <table class="comparison-main-table">
+                    <thead>
+                        <tr>
+                            <th>x̄ MEDIA GIORNALIERA</th>
+                            <th>Q2 MEDIANA</th>
+                            <th>σ DEV. STANDARD</th>
+                            <th>min MIN</th>
+                            <th>max MAX</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span id="kpi-media">-</span> <span style="color:#64748b">kWh/giorno</span></td>
+                            <td><span id="kpi-mediana">-</span> <span style="color:#64748b">kWh/giorno</span></td>
+                            <td><span id="kpi-std">-</span> <span style="color:#64748b">kWh/giorno</span></td>
+                            <td><span id="kpi-min">-</span> <span style="color:#64748b">kWh/giorno</span></td>
+                            <td><span id="kpi-max">-</span> <span style="color:#64748b">kWh/giorno</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Chart: Daily Fabbisogno over time -->
+        <section class="chart-section">
+            <div class="section-header">
+                <h2>Andamento giornaliero del Fabbisogno EE</h2>
+                <p>Somma oraria per giorno, su tutti i dati disponibili (2024-2025)</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-daily-ee"></canvas>
+            </div>
+            <div class="chart-legend" id="legend-daily-ee"></div>
+        </section>
+
+        <!-- Tables -->
+        <section class="strategies-section">
+            <div class="section-header">
+                <h2>Dettaglio giornaliero</h2>
+                <p>Statistiche per giorno e raggruppamenti utili</p>
+            </div>
+
+            <div class="strategies-grid">
+                <div class="strategy-chart-item">
+                    <h3 class="chart-subtitle">Tabella giornaliera (tutte le date)</h3>
+                    <div class="comparison-main-table-wrapper" style="max-height:420px; overflow:auto;">
+                        <table class="comparison-main-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Anno</th>
+                                    <th>Giorno</th>
+                                    <th>Ore conteggiate</th>
+                                    <th>Fabbisogno (kWh)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-daily-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <p>Statistiche Fabbisogno EE | Aggiornato: <span id="last-update"></span></p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/dataLoader.js"></script>
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/stats.js"></script>
+</body>
+
+</html>

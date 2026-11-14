@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Optimization - Dashboard Energia CONCAST</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/charts.css">
+    <style>
+        /* Prod view: KPI styling aligned with design system */
+        .prod-kpi-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .prod-kpi-grid .kpi-card {
+            min-height: 140px;
+            background: var(--card-glow), var(--bg-surface);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: var(--shadow-raised-md);
+        }
+
+        .prod-kpi-grid .kpi-icon {
+            border: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .prod-kpi-grid .kpi-subtitle {
+            color: var(--text-tertiary);
+        }
+
+        .kpi-card--euro {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(255, 255, 255, 0.9)), var(--bg-surface);
+            border-color: rgba(148, 163, 184, 0.35);
+        }
+
+        .kpi-card--euro .kpi-icon {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(37, 99, 235, 0.08));
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .kpi-card--highlight {
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05)), var(--bg-surface);
+            box-shadow: var(--shadow-raised-lg), var(--accent-glow);
+        }
+
+        .kpi-card--highlight .kpi-icon {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            font-size: 1.05rem;
+            box-shadow: 0 8px 18px rgba(37, 99, 235, 0.22);
+        }
+
+        .kpi-card--highlight .kpi-value {
+            color: var(--text-primary);
+        }
+
+        .kpi-card--savings {
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.06)), var(--bg-surface);
+            box-shadow: 0 14px 32px rgba(16, 185, 129, 0.18);
+        }
+
+        .kpi-card--savings .kpi-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 14px rgba(16, 185, 129, 0.28);
+        }
+
+        .kpi-card--savings .kpi-value {
+            color: #065f46;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .kpi-card--savings .kpi-unit {
+            color: #065f46;
+            font-weight: 700;
+        }
+
+        .kpi-card--co2 {
+            border: 1px solid rgba(5, 150, 105, 0.35);
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(15, 23, 42, 0.02)), var(--bg-surface);
+        }
+
+        .kpi-card--co2 .kpi-icon {
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.2), rgba(16, 185, 129, 0.25));
+            color: white;
+        }
+
+        .kpi-card--co2 .kpi-value {
+            color: var(--text-primary);
+        }
+
+        .kpi-sparkline {
+            margin-top: var(--space-sm);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            border: 1px dashed rgba(16, 185, 129, 0.35);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .gantt-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 0.65rem 1.6rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: var(--accent-glow);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .gantt-toggle-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-raised-lg), var(--accent-glow);
+            filter: brightness(1.02);
+        }
+
+        .gantt-toggle-btn:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-raised-md);
+        }
+
+        /* Resizable chart containers */
+        .chart-container {
+            position: relative;
+            min-height: 320px;
+        }
+
+        .chart-resize-handle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 14px;
+            cursor: ns-resize;
+            background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.1));
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .chart-resize-handle:hover {
+            background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.18));
+            border-bottom-color: rgba(37, 99, 235, 0.5);
+        }
+
+        .chart-resize-handle::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 3px;
+            background: rgba(148, 163, 184, 0.9);
+            border-radius: 2px;
+        }
+
+        .chart-container.resizing {
+            user-select: none;
+        }
+
+        .chart-container.resizing .chart-resize-handle {
+            background: rgba(37, 99, 235, 0.2);
+            border-bottom-color: rgba(37, 99, 235, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Caricamento dati...</p>
+    </div>
+
+    <nav class="app-nav" aria-label="Navigazione principale">
+        <div class="app-nav__inner">
+            <div class="app-brand">
+                <a href="index.html" class="app-logo" aria-label="Concast Energy Dashboard">Concast
+                    <span>Energy</span></a>
+                <span class="app-pill">Energy Intelligence</span>
+            </div>
+            <div class="app-nav__links">
+                <a href="index.html" class="app-nav__link">Dashboard</a>
+                <a href="stats.html" class="app-nav__link">Statistiche EE</a>
+                <a href="co2.html" class="app-nav__link app-nav__link--co2"><span class="co2-tree">🌳</span> CO₂</a>
+                <a href="forecast.html" class="app-nav__link">Scenario 2026</a>
+                <a href="milp.html" class="app-nav__link">MILP</a>
+                <a href="prodopti.html" class="app-nav__link is-active">Shift produzione</a>
+            </div>
+            <div class="app-nav__meta">
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-shell">
+        <aside class="filters-rail" aria-label="Filtri periodo e scenari">
+            <section class="time-filter filters-panel filters-panel--sticky">
+                <p class="eyebrow">Filtri</p>
+                <h2 class="filters-panel__title">Periodo &amp; Scenari</h2>
+                
+                <!-- Year Filter -->
+                <div class="filter-group">
+                    <label for="year-select">Anno:</label>
+                    <select id="year-select">
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+
+                <!-- Season Filter -->
+                <div class="filter-group">
+                    <label for="season-select">Stagione:</label>
+                    <select id="season-select">
+                        <option value="winter">Inverno (Gen-Mar)</option>
+                        <option value="spring">Primavera (Mar-Giu)</option>
+                        <option value="summer">Estate (Giu-Set)</option>
+                        <option value="fall">Autunno (Set-Dic)</option>
+                    </select>
+                </div>
+
+                <!-- Solar Panel Configuration -->
+                <div class="filter-group">
+                    <label for="panel-select">Pannelli Solari:</label>
+                    <select id="panel-select">
+                        <option value="one_solar_panel">1 Pannello</option>
+                        <option value="three_solar_panels">3 Pannelli</option>
+                    </select>
+                </div>
+
+                <!-- Plot Span Selection -->
+                <div class="filter-group" style="display: none;">
+                    <label for="plot-span-select">Span Grafici Energia:</label>
+                    <select id="plot-span-select">
+                        <option value="all">Intero Periodo</option>
+                        <option value="month">Mese</option>
+                        <option value="week">Settimana</option>
+                        <option value="day">Giorno</option>
+                    </select>
+                </div>
+
+                <!-- Daily Aggregation Toggle -->
+                <div class="filter-group" style="display: none;"> 
+                    <label>
+                        <input type="checkbox" id="daily-aggregate-toggle" checked>
+                        Aggrega Dati Giornalmente
+                    </label>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-top: 0.25rem;">Raggruppa i dati per giorno per una visualizzazione più chiara</p>
+                </div>
+            </section>
+        </aside>
+
+        <main class="dashboard-main">
+            <div class="dashboard-container">
+
+                <!-- Enhanced Header -->
+                <header class="dashboard-header page-header">
+                    <div class="page-header__content">
+                        <p class="eyebrow">Ottimizzazione Produzione</p>
+                        <div class="header-title-group">
+                            <h1>Production Shift Optimization</h1>
+                        </div>
+                        <p class="page-description">
+                            Analisi ottimizzazione turni produttivi con time-shifting per massimizzare l'utilizzo di energia rinnovabile e ridurre i costi energetici.
+                        </p>
+                    </div>
+                    <nav class="header-breadcrumb" aria-label="Breadcrumb">
+                        <span class="breadcrumb-item">Home</span>
+                        <span class="breadcrumb-separator">›</span>
+                        <span class="breadcrumb-item breadcrumb-item--active">Prod Optimization</span>
+                    </nav>
+                </header>
+
+                <!-- KPI Cards - Cost Savings -->
+                <section class="kpi-section prod-kpi-grid">
+                    <div class="kpi-card kpi-card--euro">
+                        <div class="kpi-icon">€</div>
+                        <div class="kpi-content">
+                            <h3>Costo Piano Originale</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-original-cost">--</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                            <p class="kpi-subtitle">Costo senza ottimizzazione</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-card--euro kpi-card--highlight">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-content">
+                            <h3>Costo Piano Ottimizzato</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-optimized-cost">--</p>
+                                <p class="kpi-unit">€</p>
+                            </div>
+                            <p class="kpi-subtitle">Con time-shifting ottimizzato</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-card--savings">
+                        <div class="kpi-icon">📊</div>
+                        <div class="kpi-content">
+                            <h3>Risparmio Percentuale</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-savings-percent">--</p>
+                                <p class="kpi-unit">%</p>
+                            </div>
+                            <p class="kpi-subtitle">Riduzione costi energetici</p>
+                            <div class="kpi-sparkline">
+                                <canvas id="sparkline-savings" height="40"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-card--co2">
+                        <div class="kpi-icon">🌍</div>
+                        <div class="kpi-content">
+                            <h3>Emissioni CO₂</h3>
+                            <div class="kpi-metric">
+                                <p class="kpi-value" id="kpi-co2-emissions">--</p>
+                                <p class="kpi-unit">kg</p>
+                            </div>
+                            <p class="kpi-subtitle">Impatto ambientale totale</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gantt Chart Section -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <h2>Gantt Chart - Pianificazione Turni</h2>
+                                <p id="gantt-description">Confronto visivo tra i turni originali (bordo) e i turni ottimizzati (riempimento)</p>
+                            </div>
+                            <button 
+                                id="gantt-toggle-btn"
+                                onclick="ProdOptiApp.toggleGanttView()"
+                                class="gantt-toggle-btn">
+                                🔄 Vedi Solo Ottimizzati
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-gantt"></canvas>
+                    </div>
+                </section>
+
+                <!-- Time Shift Translation Chart -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Traslazione Temporale per Turno</h2>
+                        <p>Minuti di spostamento per ogni turno ottimizzato (valori positivi = ritardo, negativi = anticipo)</p>
+                    </div>
+                    <div class="chart-container" data-chart-id="time-shift">
+                        <canvas id="chart-time-shift"></canvas>
+                        <div class="chart-resize-handle"></div>
+                    </div>
+                    <div class="chart-legend" id="legend-time-shift"></div>
+                </section>
+
+                <!-- Energy Consumption Plot -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Consumo e Produzione Energetica</h2>
+                        <p>Energia generata da fonti rinnovabili e cogeneratore vs energia utilizzata dalle fasi produttive</p>
+                    </div>
+                    <div class="chart-container" data-chart-id="energy-consumption">
+                        <canvas id="chart-energy-consumption"></canvas>
+                        <div class="chart-resize-handle"></div>
+                    </div>
+                    <div class="chart-legend" id="legend-energy-consumption"></div>
+                </section>
+
+                <!-- Generated Energy Surplus & Prices -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Surplus Energia Generata & Prezzi Elettricità</h2>
+                        <p>Energia rinnovabile sprecata e andamento prezzi elettricità nel periodo</p>
+                    </div>
+                    <div class="chart-container" data-chart-id="surplus-prices">
+                        <canvas id="chart-surplus-prices"></canvas>
+                        <div class="chart-resize-handle"></div>
+                    </div>
+                    <div class="chart-legend" id="legend-surplus-prices"></div>
+                </section>
+
+                <!-- Cold Room Simulation Characteristics -->
+                <section class="efficiency-section">
+                    <div class="section-header">
+                        <h2>Caratteristiche Simulazione Cella Frigo</h2>
+                        <p>Parametri tecnici del chiller e della cella frigo utilizzati nella simulazione</p>
+                    </div>
+                    <div class="efficiency-grid">
+                        <!-- Chiller Parameters -->
+                        <div class="efficiency-card">
+                            <h3>Parametri Chiller</h3>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Capacità Nominale:</span>
+                                <span class="efficiency-value" id="chiller-nominal-capacity">--</span>
+                                <span class="efficiency-unit">kW</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Velocità Raffreddamento:</span>
+                                <span class="efficiency-value" id="chiller-cooling-rate">--</span>
+                                <span class="efficiency-unit">°C/h</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Efficienza Chiller:</span>
+                                <span class="efficiency-value" id="chiller-efficiency">--</span>
+                                <span class="efficiency-unit">-</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Superficie Camera:</span>
+                                <span class="efficiency-value" id="room-surface-area">--</span>
+                                <span class="efficiency-unit">m²</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Valore U Isolamento:</span>
+                                <span class="efficiency-value" id="room-u-value">--</span>
+                                <span class="efficiency-unit">W/m²K</span>
+                            </div>
+                        </div>
+
+                        <!-- Simulation Parameters -->
+                        <div class="efficiency-card">
+                            <h3>Parametri Simulazione</h3>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Temperatura Max:</span>
+                                <span class="efficiency-value" id="sim-max-temp">--</span>
+                                <span class="efficiency-unit">°C</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Temperatura Min:</span>
+                                <span class="efficiency-value" id="sim-min-temp">--</span>
+                                <span class="efficiency-unit">°C</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Temperatura Target:</span>
+                                <span class="efficiency-value" id="sim-target-temp">--</span>
+                                <span class="efficiency-unit">°C</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Guadagno Proporzionale:</span>
+                                <span class="efficiency-value" id="sim-proportional-gain">--</span>
+                                <span class="efficiency-unit">-</span>
+                            </div>
+                            <div class="efficiency-stat">
+                                <span class="efficiency-label">Guadagno Derivativo:</span>
+                                <span class="efficiency-value" id="sim-derivative-gain">--</span>
+                                <span class="efficiency-unit">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Chiller Control Plot -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Controllo Potenza Cella Frigo</h2>
+                        <p>Potenza utilizzata dal chiller da fonti generate vs rete elettrica</p>
+                    </div>
+                    <div class="chart-container" data-chart-id="chiller-control">
+                        <canvas id="chart-chiller-control"></canvas>
+                        <div class="chart-resize-handle"></div>
+                    </div>
+                    <div class="chart-legend" id="legend-chiller-control"></div>
+                </section>
+
+                <!-- Chiller Temperature Plot -->
+                <section class="chart-section">
+                    <div class="section-header">
+                        <h2>Temperature Cella Frigo</h2>
+                        <p>Andamento temperature: limiti, target e temperatura effettiva della cella frigo</p>
+                    </div>
+                    <div class="chart-container" data-chart-id="chiller-temperature">
+                        <canvas id="chart-chiller-temperature"></canvas>
+                        <div class="chart-resize-handle"></div>
+                    </div>
+                    <div class="chart-legend" id="legend-chiller-temperature"></div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="dashboard-footer">
+                    <p>Production Optimization Dashboard - Dati 2024-2025 | Aggiornato: <span id="last-update"></span></p>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/dashboardAnimations.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/optprod_charts.js?v=2"></script>
+    <script src="js/optprod_init.js?v=2"></script>
+</body>
+
+</html>

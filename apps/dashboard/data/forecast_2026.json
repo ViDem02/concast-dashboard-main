@@ -1,0 +1,908 @@
+{
+  "meta": {
+    "years_used": [
+      2024,
+      2025
+    ],
+    "grid_emission_factor_kg_per_kwh": 0.33,
+    "methane_emission_factor_kg_per_smc": 1.9,
+    "gas_kwh_per_smc": 10.55,
+    "scenarios": {
+      "optimistic": {
+        "label": "Scenario Ottimistico",
+        "description": "PUN e PSV compressi da FER elevate, clima mite e domanda contenuta.",
+        "pun_shift": -12.0,
+        "pun_max": 89.0,
+        "psv_shift": -5.0,
+        "psv_max": 29.0
+      },
+      "standard": {
+        "label": "Scenario Standard",
+        "description": "Mercato stabile con PUN allineato al range 95-115 €/MWh.",
+        "pun_shift": 0.0,
+        "psv_shift": 0.0
+      },
+      "pessimistic": {
+        "label": "Scenario Pessimistico",
+        "description": "Stress su gas ed elettrico: siccità, ondate di calore, shock geopolitici.",
+        "pun_shift": 45.0,
+        "pun_min": 140.0,
+        "psv_shift": 27.0,
+        "psv_min": 60.0
+      }
+    },
+    "scenario_stats": {
+      "optimistic": {
+        "grid_cost_eur": 255258.84,
+        "gas_cost_eur": 118942.24,
+        "total_cost_eur": 374201.08,
+        "avg_pun_eur_per_mwh": 86.15,
+        "avg_psv_eur_per_mwh": 27.51
+      },
+      "standard": {
+        "grid_cost_eur": 292177.4,
+        "gas_cost_eur": 141862.78,
+        "total_cost_eur": 434040.18,
+        "avg_pun_eur_per_mwh": 98.5,
+        "avg_psv_eur_per_mwh": 32.91
+      },
+      "pessimistic": {
+        "grid_cost_eur": 427056.45,
+        "gas_cost_eur": 265823.84,
+        "total_cost_eur": 692880.29,
+        "avg_pun_eur_per_mwh": 144.01,
+        "avg_psv_eur_per_mwh": 60.82
+      }
+    },
+    "totals": {
+      "ee_total_kwh": 4385664.7,
+      "ee_grid_kwh": 2961669.2,
+      "ee_coge_kwh": 1423995.5,
+      "ee_pv_kwh": 589262.93,
+      "ee_total_with_pv_kwh": 4974927.63,
+      "gas_coge_smc": 416444.75,
+      "co2_total_kg": 1768595.86,
+      "co2_avoided_kg": 194456.767
+    },
+    "notes": "Media mensile 2024-2025 (Normal) su dati completi da Gen 2024 a Set 2025, senza esclusioni. FV stimato dagli scenari ottimizzati (FV12)."
+  },
+  "months": [
+    {
+      "month": 1,
+      "label": "Gennaio",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 1,
+          "period": "2024-01",
+          "ee_grid_kwh": 293241.18,
+          "ee_coge_kwh": 96530.0,
+          "ee_total_no_pv_kwh": 389771.18,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 25244.5,
+          "gas_coge_smc": 28441.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 96769.589,
+          "co2_coge_kg": 54037.9,
+          "co2_total_kg": 150807.489
+        },
+        {
+          "year": 2025,
+          "month": 1,
+          "period": "2025-01",
+          "ee_grid_kwh": 383337.2,
+          "ee_coge_kwh": 68.0,
+          "ee_total_no_pv_kwh": 383405.2,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 5171.0,
+          "gas_coge_smc": 90.0,
+          "pun_eur_per_mwh": 99.69,
+          "estimated_ee_cost_eur": 38221.66,
+          "co2_grid_kg": 126501.276,
+          "co2_coge_kg": 171.0,
+          "co2_total_kg": 126672.276
+        }
+      ],
+      "ee_grid_kwh": 338289.19,
+      "ee_coge_kwh": 48299.0,
+      "ee_total_kwh": 386588.19,
+      "ee_pv_kwh": 44406.759,
+      "ee_total_with_pv_kwh": 430994.949,
+      "gas_coge_smc": 14265.5,
+      "co2_grid_kg": 111635.432,
+      "co2_coge_kg": 27104.45,
+      "co2_avoided_kg": 14654.23,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 89.0,
+          "psv_eur_per_mwh": 29.0,
+          "grid_cost_eur": 30107.74,
+          "gas_cost_eur": 4364.53,
+          "total_cost_eur": 34472.27
+        },
+        "standard": {
+          "pun_eur_per_mwh": 104.65,
+          "psv_eur_per_mwh": 37.24,
+          "grid_cost_eur": 35401.96,
+          "gas_cost_eur": 5604.66,
+          "total_cost_eur": 41006.62
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 149.65,
+          "psv_eur_per_mwh": 64.24,
+          "grid_cost_eur": 50624.98,
+          "gas_cost_eur": 9668.19,
+          "total_cost_eur": 60293.17
+        }
+      }
+    },
+    {
+      "month": 2,
+      "label": "Febbraio",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 2,
+          "period": "2024-02",
+          "ee_grid_kwh": 136977.82,
+          "ee_coge_kwh": 208702.0,
+          "ee_total_no_pv_kwh": 345679.82,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 27747.0,
+          "gas_coge_smc": 59578.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 45202.681,
+          "co2_coge_kg": 113198.2,
+          "co2_total_kg": 158400.881
+        },
+        {
+          "year": 2025,
+          "month": 2,
+          "period": "2025-02",
+          "ee_grid_kwh": 334459.6,
+          "ee_coge_kwh": 0.0,
+          "ee_total_no_pv_kwh": 334459.6,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 8318.0,
+          "gas_coge_smc": 0.0,
+          "pun_eur_per_mwh": 99.69,
+          "estimated_ee_cost_eur": 33342.28,
+          "co2_grid_kg": 110371.668,
+          "co2_coge_kg": 0.0,
+          "co2_total_kg": 110371.668
+        }
+      ],
+      "ee_grid_kwh": 235718.71,
+      "ee_coge_kwh": 104351.0,
+      "ee_total_kwh": 340069.71,
+      "ee_pv_kwh": 43441.85,
+      "ee_total_with_pv_kwh": 383511.56,
+      "gas_coge_smc": 29789.0,
+      "co2_grid_kg": 77787.174,
+      "co2_coge_kg": 56599.1,
+      "co2_avoided_kg": 14335.811,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 89.0,
+          "psv_eur_per_mwh": 29.0,
+          "grid_cost_eur": 20978.97,
+          "gas_cost_eur": 9113.94,
+          "total_cost_eur": 30092.91
+        },
+        "standard": {
+          "pun_eur_per_mwh": 101.61,
+          "psv_eur_per_mwh": 34.96,
+          "grid_cost_eur": 23951.38,
+          "gas_cost_eur": 10987.02,
+          "total_cost_eur": 34938.4
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 146.61,
+          "psv_eur_per_mwh": 61.96,
+          "grid_cost_eur": 34558.72,
+          "gas_cost_eur": 19472.41,
+          "total_cost_eur": 54031.13
+        }
+      }
+    },
+    {
+      "month": 3,
+      "label": "Marzo",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 3,
+          "period": "2024-03",
+          "ee_grid_kwh": 269993.5,
+          "ee_coge_kwh": 132134.0,
+          "ee_total_no_pv_kwh": 402127.5,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 39278.5,
+          "gas_coge_smc": 38339.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 89097.855,
+          "co2_coge_kg": 72844.1,
+          "co2_total_kg": 161941.955
+        },
+        {
+          "year": 2025,
+          "month": 3,
+          "period": "2025-03",
+          "ee_grid_kwh": 243601.5,
+          "ee_coge_kwh": 142832.0,
+          "ee_total_no_pv_kwh": 386433.5,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 16324.0,
+          "gas_coge_smc": 40585.0,
+          "pun_eur_per_mwh": 96.95,
+          "estimated_ee_cost_eur": 37464.73,
+          "co2_grid_kg": 80388.495,
+          "co2_coge_kg": 77111.5,
+          "co2_total_kg": 157499.995
+        }
+      ],
+      "ee_grid_kwh": 256797.5,
+      "ee_coge_kwh": 137483.0,
+      "ee_total_kwh": 394280.5,
+      "ee_pv_kwh": 50061.644,
+      "ee_total_with_pv_kwh": 444342.144,
+      "gas_coge_smc": 39462.0,
+      "co2_grid_kg": 84743.175,
+      "co2_coge_kg": 74977.8,
+      "co2_avoided_kg": 16520.342,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 86.68,
+          "psv_eur_per_mwh": 27.76,
+          "grid_cost_eur": 22259.21,
+          "gas_cost_eur": 11557.16,
+          "total_cost_eur": 33816.37
+        },
+        "standard": {
+          "pun_eur_per_mwh": 98.68,
+          "psv_eur_per_mwh": 32.76,
+          "grid_cost_eur": 25340.78,
+          "gas_cost_eur": 13638.78,
+          "total_cost_eur": 38979.56
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 143.68,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 36896.66,
+          "gas_cost_eur": 24979.45,
+          "total_cost_eur": 61876.11
+        }
+      }
+    },
+    {
+      "month": 4,
+      "label": "Aprile",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 4,
+          "period": "2024-04",
+          "ee_grid_kwh": 229201.0,
+          "ee_coge_kwh": 166557.0,
+          "ee_total_no_pv_kwh": 395758.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 55133.5,
+          "gas_coge_smc": 48110.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 75636.33,
+          "co2_coge_kg": 91409.0,
+          "co2_total_kg": 167045.33
+        },
+        {
+          "year": 2025,
+          "month": 4,
+          "period": "2025-04",
+          "ee_grid_kwh": 247889.2,
+          "ee_coge_kwh": 168008.0,
+          "ee_total_no_pv_kwh": 415897.2,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 18247.0,
+          "gas_coge_smc": 50133.0,
+          "pun_eur_per_mwh": 99.48,
+          "estimated_ee_cost_eur": 41373.45,
+          "co2_grid_kg": 81803.436,
+          "co2_coge_kg": 95252.7,
+          "co2_total_kg": 177056.136
+        }
+      ],
+      "ee_grid_kwh": 238545.1,
+      "ee_coge_kwh": 167282.5,
+      "ee_total_kwh": 405827.6,
+      "ee_pv_kwh": 48323.283,
+      "ee_total_with_pv_kwh": 454150.883,
+      "gas_coge_smc": 49121.5,
+      "co2_grid_kg": 78719.883,
+      "co2_coge_kg": 93330.85,
+      "co2_avoided_kg": 15946.683,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 84.04,
+          "psv_eur_per_mwh": 25.78,
+          "grid_cost_eur": 20047.33,
+          "gas_cost_eur": 13360.02,
+          "total_cost_eur": 33407.35
+        },
+        "standard": {
+          "pun_eur_per_mwh": 96.04,
+          "psv_eur_per_mwh": 30.78,
+          "grid_cost_eur": 22909.87,
+          "gas_cost_eur": 15951.18,
+          "total_cost_eur": 38861.05
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 141.04,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 33644.4,
+          "gas_cost_eur": 31093.91,
+          "total_cost_eur": 64738.31
+        }
+      }
+    },
+    {
+      "month": 5,
+      "label": "Maggio",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 5,
+          "period": "2024-05",
+          "ee_grid_kwh": 212512.0,
+          "ee_coge_kwh": 215208.0,
+          "ee_total_no_pv_kwh": 427720.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 56292.0,
+          "gas_coge_smc": 60669.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 70128.96,
+          "co2_coge_kg": 115271.1,
+          "co2_total_kg": 185400.06
+        },
+        {
+          "year": 2025,
+          "month": 5,
+          "period": "2025-05",
+          "ee_grid_kwh": 311652.0,
+          "ee_coge_kwh": 127199.0,
+          "ee_total_no_pv_kwh": 438851.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 21471.0,
+          "gas_coge_smc": 38082.0,
+          "pun_eur_per_mwh": 102.23,
+          "estimated_ee_cost_eur": 44863.74,
+          "co2_grid_kg": 102845.16,
+          "co2_coge_kg": 72355.8,
+          "co2_total_kg": 175200.96
+        }
+      ],
+      "ee_grid_kwh": 262082.0,
+      "ee_coge_kwh": 171203.5,
+      "ee_total_kwh": 433285.5,
+      "ee_pv_kwh": 50017.736,
+      "ee_total_with_pv_kwh": 483303.236,
+      "gas_coge_smc": 49375.5,
+      "co2_grid_kg": 86487.06,
+      "co2_coge_kg": 93813.45,
+      "co2_avoided_kg": 16505.853,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 76.88,
+          "psv_eur_per_mwh": 23.88,
+          "grid_cost_eur": 20148.86,
+          "gas_cost_eur": 12439.37,
+          "total_cost_eur": 32588.23
+        },
+        "standard": {
+          "pun_eur_per_mwh": 88.88,
+          "psv_eur_per_mwh": 28.88,
+          "grid_cost_eur": 23293.85,
+          "gas_cost_eur": 15043.92,
+          "total_cost_eur": 38337.77
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 140.0,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 36691.48,
+          "gas_cost_eur": 31254.69,
+          "total_cost_eur": 67946.17
+        }
+      }
+    },
+    {
+      "month": 6,
+      "label": "Giugno",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 6,
+          "period": "2024-06",
+          "ee_grid_kwh": 238071.0,
+          "ee_coge_kwh": 170814.0,
+          "ee_total_no_pv_kwh": 408885.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 67801.0,
+          "gas_coge_smc": 49252.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 78563.43,
+          "co2_coge_kg": 93578.8,
+          "co2_total_kg": 172142.23
+        },
+        {
+          "year": 2025,
+          "month": 6,
+          "period": "2025-06",
+          "ee_grid_kwh": 276673.2,
+          "ee_coge_kwh": 167333.0,
+          "ee_total_no_pv_kwh": 444006.2,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 23019.0,
+          "gas_coge_smc": 49821.0,
+          "pun_eur_per_mwh": 99.28,
+          "estimated_ee_cost_eur": 44080.94,
+          "co2_grid_kg": 91302.156,
+          "co2_coge_kg": 94659.9,
+          "co2_total_kg": 185962.056
+        }
+      ],
+      "ee_grid_kwh": 257372.1,
+      "ee_coge_kwh": 169073.5,
+      "ee_total_kwh": 426445.6,
+      "ee_pv_kwh": 50355.981,
+      "ee_total_with_pv_kwh": 476801.581,
+      "gas_coge_smc": 49536.5,
+      "co2_grid_kg": 84932.793,
+      "co2_coge_kg": 94119.35,
+      "co2_avoided_kg": 16617.474,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 83.84,
+          "psv_eur_per_mwh": 25.63,
+          "grid_cost_eur": 21578.08,
+          "gas_cost_eur": 13394.5,
+          "total_cost_eur": 34972.58
+        },
+        "standard": {
+          "pun_eur_per_mwh": 95.84,
+          "psv_eur_per_mwh": 30.63,
+          "grid_cost_eur": 24666.54,
+          "gas_cost_eur": 16007.55,
+          "total_cost_eur": 40674.09
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 140.84,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 36248.29,
+          "gas_cost_eur": 31356.6,
+          "total_cost_eur": 67604.89
+        }
+      }
+    },
+    {
+      "month": 7,
+      "label": "Luglio",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 7,
+          "period": "2024-07",
+          "ee_grid_kwh": 54788.0,
+          "ee_coge_kwh": 200780.0,
+          "ee_total_no_pv_kwh": 255568.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 76848.0,
+          "gas_coge_smc": 57801.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 18080.04,
+          "co2_coge_kg": 109821.9,
+          "co2_total_kg": 127901.94
+        },
+        {
+          "year": 2025,
+          "month": 7,
+          "period": "2025-07",
+          "ee_grid_kwh": 354397.6,
+          "ee_coge_kwh": 85298.0,
+          "ee_total_no_pv_kwh": 439695.6,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 21069.0,
+          "gas_coge_smc": 26992.0,
+          "pun_eur_per_mwh": 102.12,
+          "estimated_ee_cost_eur": 44901.71,
+          "co2_grid_kg": 116951.208,
+          "co2_coge_kg": 51284.8,
+          "co2_total_kg": 168236.008
+        }
+      ],
+      "ee_grid_kwh": 204592.8,
+      "ee_coge_kwh": 143039.0,
+      "ee_total_kwh": 347631.8,
+      "ee_pv_kwh": 48466.864,
+      "ee_total_with_pv_kwh": 396098.664,
+      "gas_coge_smc": 42396.5,
+      "co2_grid_kg": 67515.624,
+      "co2_coge_kg": 80553.35,
+      "co2_avoided_kg": 15994.065,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 86.27,
+          "psv_eur_per_mwh": 27.45,
+          "grid_cost_eur": 17650.22,
+          "gas_cost_eur": 12277.92,
+          "total_cost_eur": 29928.14
+        },
+        "standard": {
+          "pun_eur_per_mwh": 98.27,
+          "psv_eur_per_mwh": 32.45,
+          "grid_cost_eur": 20105.33,
+          "gas_cost_eur": 14514.34,
+          "total_cost_eur": 34619.67
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 143.27,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 29312.01,
+          "gas_cost_eur": 26836.98,
+          "total_cost_eur": 56148.99
+        }
+      }
+    },
+    {
+      "month": 8,
+      "label": "Agosto",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 8,
+          "period": "2024-08",
+          "ee_grid_kwh": 0.0,
+          "ee_coge_kwh": 131151.0,
+          "ee_total_no_pv_kwh": 131151.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 68194.0,
+          "gas_coge_smc": 37210.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 0.0,
+          "co2_coge_kg": 70699.0,
+          "co2_total_kg": 70699.0
+        },
+        {
+          "year": 2025,
+          "month": 8,
+          "period": "2025-08",
+          "ee_grid_kwh": 325149.2,
+          "ee_coge_kwh": 84160.0,
+          "ee_total_no_pv_kwh": 409309.2,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 20064.5,
+          "gas_coge_smc": 26780.5,
+          "pun_eur_per_mwh": 104.45,
+          "estimated_ee_cost_eur": 42752.35,
+          "co2_grid_kg": 107299.236,
+          "co2_coge_kg": 50882.95,
+          "co2_total_kg": 158182.186
+        }
+      ],
+      "ee_grid_kwh": 162574.6,
+      "ee_coge_kwh": 107655.5,
+      "ee_total_kwh": 270230.1,
+      "ee_pv_kwh": 50289.117,
+      "ee_total_with_pv_kwh": 320519.217,
+      "gas_coge_smc": 31995.25,
+      "co2_grid_kg": 53649.618,
+      "co2_coge_kg": 60790.975,
+      "co2_avoided_kg": 16595.409,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 88.29,
+          "psv_eur_per_mwh": 28.97,
+          "grid_cost_eur": 14353.71,
+          "gas_cost_eur": 9778.82,
+          "total_cost_eur": 24132.53
+        },
+        "standard": {
+          "pun_eur_per_mwh": 100.29,
+          "psv_eur_per_mwh": 33.97,
+          "grid_cost_eur": 16304.61,
+          "gas_cost_eur": 11466.57,
+          "total_cost_eur": 27771.18
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 145.29,
+          "psv_eur_per_mwh": 60.97,
+          "grid_cost_eur": 23620.46,
+          "gas_cost_eur": 20580.42,
+          "total_cost_eur": 44200.88
+        }
+      }
+    },
+    {
+      "month": 9,
+      "label": "Settembre",
+      "sources": [
+        2024,
+        2025
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 9,
+          "period": "2024-09",
+          "ee_grid_kwh": 614.0,
+          "ee_coge_kwh": 153968.0,
+          "ee_total_no_pv_kwh": 154582.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 40280.0,
+          "gas_coge_smc": 44039.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 202.62,
+          "co2_coge_kg": 83674.1,
+          "co2_total_kg": 83876.72
+        },
+        {
+          "year": 2025,
+          "month": 9,
+          "period": "2025-09",
+          "ee_grid_kwh": 317930.0,
+          "ee_coge_kwh": 97931.0,
+          "ee_total_no_pv_kwh": 415861.0,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 13110.0,
+          "gas_coge_smc": 31917.0,
+          "pun_eur_per_mwh": 101.41,
+          "estimated_ee_cost_eur": 42172.46,
+          "co2_grid_kg": 104916.9,
+          "co2_coge_kg": 60642.3,
+          "co2_total_kg": 165559.2
+        }
+      ],
+      "ee_grid_kwh": 159272.0,
+      "ee_coge_kwh": 125949.5,
+      "ee_total_kwh": 285221.5,
+      "ee_pv_kwh": 47185.814,
+      "ee_total_with_pv_kwh": 332407.314,
+      "gas_coge_smc": 37978.0,
+      "co2_grid_kg": 52559.76,
+      "co2_coge_kg": 72158.2,
+      "co2_avoided_kg": 15571.319,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 86.17,
+          "psv_eur_per_mwh": 27.38,
+          "grid_cost_eur": 13724.47,
+          "gas_cost_eur": 10970.29,
+          "total_cost_eur": 24694.76
+        },
+        "standard": {
+          "pun_eur_per_mwh": 98.17,
+          "psv_eur_per_mwh": 32.38,
+          "grid_cost_eur": 15635.73,
+          "gas_cost_eur": 12973.63,
+          "total_cost_eur": 28609.36
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 143.17,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 22802.97,
+          "gas_cost_eur": 24040.07,
+          "total_cost_eur": 46843.04
+        }
+      }
+    },
+    {
+      "month": 10,
+      "label": "Ottobre",
+      "sources": [
+        2024
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 10,
+          "period": "2024-10",
+          "ee_grid_kwh": 219262.4,
+          "ee_coge_kwh": 152563.0,
+          "ee_total_no_pv_kwh": 371825.4,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 25705.0,
+          "gas_coge_smc": 43873.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 72356.592,
+          "co2_coge_kg": 83358.7,
+          "co2_total_kg": 155715.292
+        }
+      ],
+      "ee_grid_kwh": 219262.4,
+      "ee_coge_kwh": 152563.0,
+      "ee_total_kwh": 371825.4,
+      "ee_pv_kwh": 51438.23,
+      "ee_total_with_pv_kwh": 423263.63,
+      "gas_coge_smc": 43873.0,
+      "co2_grid_kg": 72356.592,
+      "co2_coge_kg": 83358.7,
+      "co2_avoided_kg": 16974.616,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 88.8,
+          "psv_eur_per_mwh": 29.0,
+          "grid_cost_eur": 19470.5,
+          "gas_cost_eur": 13422.94,
+          "total_cost_eur": 32893.44
+        },
+        "standard": {
+          "pun_eur_per_mwh": 100.8,
+          "psv_eur_per_mwh": 34.35,
+          "grid_cost_eur": 22101.65,
+          "gas_cost_eur": 15899.25,
+          "total_cost_eur": 38000.9
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 145.8,
+          "psv_eur_per_mwh": 61.35,
+          "grid_cost_eur": 31968.46,
+          "gas_cost_eur": 28396.47,
+          "total_cost_eur": 60364.93
+        }
+      }
+    },
+    {
+      "month": 11,
+      "label": "Novembre",
+      "sources": [
+        2024
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 11,
+          "period": "2024-11",
+          "ee_grid_kwh": 263585.2,
+          "ee_coge_kwh": 96408.0,
+          "ee_total_no_pv_kwh": 359993.2,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 29928.0,
+          "gas_coge_smc": 28064.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 86983.116,
+          "co2_coge_kg": 53321.6,
+          "co2_total_kg": 140304.716
+        }
+      ],
+      "ee_grid_kwh": 263585.2,
+      "ee_coge_kwh": 96408.0,
+      "ee_total_kwh": 359993.2,
+      "ee_pv_kwh": 54648.03,
+      "ee_total_with_pv_kwh": 414641.23,
+      "gas_coge_smc": 28064.0,
+      "co2_grid_kg": 86983.116,
+      "co2_coge_kg": 53321.6,
+      "co2_avoided_kg": 18033.85,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 86.07,
+          "psv_eur_per_mwh": 27.3,
+          "grid_cost_eur": 22686.78,
+          "gas_cost_eur": 8082.85,
+          "total_cost_eur": 30769.63
+        },
+        "standard": {
+          "pun_eur_per_mwh": 98.07,
+          "psv_eur_per_mwh": 32.3,
+          "grid_cost_eur": 25849.8,
+          "gas_cost_eur": 9563.23,
+          "total_cost_eur": 35413.03
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 143.07,
+          "psv_eur_per_mwh": 60.0,
+          "grid_cost_eur": 37711.13,
+          "gas_cost_eur": 17764.51,
+          "total_cost_eur": 55475.64
+        }
+      }
+    },
+    {
+      "month": 12,
+      "label": "Dicembre",
+      "sources": [
+        2024
+      ],
+      "history": [
+        {
+          "year": 2024,
+          "month": 12,
+          "period": "2024-12",
+          "ee_grid_kwh": 363577.6,
+          "ee_coge_kwh": 688.0,
+          "ee_total_no_pv_kwh": 364265.6,
+          "pv_manual_kwh": null,
+          "ee_pv_kwh": 20495.0,
+          "gas_coge_smc": 588.0,
+          "pun_eur_per_mwh": null,
+          "estimated_ee_cost_eur": null,
+          "co2_grid_kg": 119980.608,
+          "co2_coge_kg": 1117.2,
+          "co2_total_kg": 121097.808
+        }
+      ],
+      "ee_grid_kwh": 363577.6,
+      "ee_coge_kwh": 688.0,
+      "ee_total_kwh": 364265.6,
+      "ee_pv_kwh": 50627.622,
+      "ee_total_with_pv_kwh": 414893.222,
+      "gas_coge_smc": 588.0,
+      "co2_grid_kg": 119980.608,
+      "co2_coge_kg": 1117.2,
+      "co2_avoided_kg": 16707.115,
+      "scenarios": {
+        "optimistic": {
+          "pun_eur_per_mwh": 88.71,
+          "psv_eur_per_mwh": 29.0,
+          "grid_cost_eur": 32252.97,
+          "gas_cost_eur": 179.9,
+          "total_cost_eur": 32432.87
+        },
+        "standard": {
+          "pun_eur_per_mwh": 100.71,
+          "psv_eur_per_mwh": 34.28,
+          "grid_cost_eur": 36615.9,
+          "gas_cost_eur": 212.65,
+          "total_cost_eur": 36828.55
+        },
+        "pessimistic": {
+          "pun_eur_per_mwh": 145.71,
+          "psv_eur_per_mwh": 61.28,
+          "grid_cost_eur": 52976.89,
+          "gas_cost_eur": 380.14,
+          "total_cost_eur": 53357.03
+        }
+      }
+    }
+  ]
+}

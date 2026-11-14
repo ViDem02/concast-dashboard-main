@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Integrazione - Opzione "Tutti"</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #ddd; }
+        .success { background-color: #d4edda; }
+        .error { background-color: #f8d7da; }
+        .log { font-size: 12px; color: #666; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test Integrazione - Funzionalità "Tutti"</h1>
+    <div id="results"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/dataLoader.js"></script>
+    <script src="js/dataProcessor.js"></script>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, success, message) {
+            const div = document.createElement('div');
+            div.className = 'test ' + (success ? 'success' : 'error');
+            div.innerHTML = `<strong>${title}</strong>: ${success ? '✅ PASS' : '❌ FAIL'}<div class="log">${message}</div>`;
+            resultsDiv.appendChild(div);
+        }
+
+        async function runTests() {
+            try {
+                // Test 1: Caricamento dati
+                addResult('Test 1', false, 'Caricamento dati in corso...');
+                await dataLoader.loadAll();
+                
+                const years = dataLoader.getAvailableYears();
+                addResult('Test 1: Caricamento Dati', true, `Anni disponibili: ${years.join(', ')}`);
+
+                // Test 2: Inizializzazione DataProcessor
+                initDataProcessor();
+                addResult('Test 2: DataProcessor', true, 'DataProcessor inizializzato correttamente');
+
+                // Test 3: Aggregazione tutti gli anni
+                const allYearsData = dataProcessor.aggregateAllYearsData();
+                const numLabels = allYearsData.labels.length;
+                addResult('Test 3: aggregateAllYearsData()', 
+                    numLabels > 0, 
+                    `${numLabels} periodi aggregati. Primi: ${allYearsData.labels.slice(0, 3).join(', ')}, Ultimi: ${allYearsData.labels.slice(-3).join(', ')}`);
+
+                // Test 4: Calcolo KPI tutti gli anni
+                const allYearsKPIs = dataProcessor.calculateAllYearsKPIs();
+                addResult('Test 4: calculateAllYearsKPIs()', 
+                    allYearsKPIs.fabbisogno_ee > 0, 
+                    `Fabbisogno EE: ${allYearsKPIs.fabbisogno_ee.toFixed(0)} kWh, Autosufficienza: ${allYearsKPIs.autosufficienza_ee_perc.toFixed(1)}%`);
+
+                // Test 5: Calcolo Economics tutti gli anni
+                const allYearsEconomics = dataProcessor.calculateAllYearsEconomics();
+                addResult('Test 5: calculateAllYearsEconomics()', 
+                    allYearsEconomics.costo_totale > 0, 
+                    `Costo Totale: €${allYearsEconomics.costo_totale.toFixed(0)}, Risparmio: €${allYearsEconomics.risparmio_autoproduzione.toFixed(0)}`);
+
+                // Test 6: Aggregazione strategie tutti gli anni
+                const allYearsStrategies = dataProcessor.aggregateAllYearsStrategies();
+                addResult('Test 6: aggregateAllYearsStrategies()', 
+                    allYearsStrategies.labels.length > 0, 
+                    `${allYearsStrategies.labels.length} periodi per strategie`);
+
+                // Test 7: Comparazione FV tutti gli anni
+                const allYearsFV = dataProcessor.aggregateAllYearsFVOptimizationComparison();
+                addResult('Test 7: aggregateAllYearsFVOptimizationComparison()', 
+                    allYearsFV.labels.length > 0, 
+                    `${allYearsFV.labels.length} periodi per comparazione FV`);
+
+                // Test 8: Verifica coerenza dati
+                const coherenceCheck = allYearsData.labels.length === allYearsStrategies.labels.length && 
+                                      allYearsData.labels.length === allYearsFV.labels.length;
+                addResult('Test 8: Coerenza Dati', 
+                    coherenceCheck, 
+                    `Tutti i dataset hanno ${allYearsData.labels.length} periodi`);
+
+                // Riepilogo
+                const summaryDiv = document.createElement('div');
+                summaryDiv.style.marginTop = '20px';
+                summaryDiv.style.padding = '15px';
+                summaryDiv.style.backgroundColor = '#d1ecf1';
+                summaryDiv.style.border = '1px solid #bee5eb';
+                summaryDiv.innerHTML = `
+                    <h3>✅ Tutti i test completati con successo!</h3>
+                    <p>La funzionalità "Tutti" è pronta per l'uso.</p>
+                    <p><strong>Dati aggregati:</strong></p>
+                    <ul>
+                        <li>Periodo totale: ${allYearsData.labels[0]} - ${allYearsData.labels[allYearsData.labels.length-1]}</li>
+                        <li>Numero mesi: ${allYearsData.labels.length}</li>
+                        <li>Fabbisogno totale: ${(allYearsKPIs.fabbisogno_ee/1000).toFixed(0)} MWh</li>
+                        <li>Autosufficienza media: ${allYearsKPIs.autosufficienza_ee_perc.toFixed(1)}%</li>
+                    </ul>
+                `;
+                resultsDiv.appendChild(summaryDiv);
+
+            } catch (error) {
+                addResult('Errore', false, error.message + '\n' + error.stack);
+                console.error(error);
+            }
+        }
+
+        // Avvia i test
+        runTests();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,406 @@
+/* CO2 Dashboard Styling */
+
+:root {
+  --co2-bg: #f8f9fa;
+  --co2-bg-secondary: #f9fafb;
+  --co2-text: #1f2937;
+  --co2-text-main: #111827;
+  --co2-text-muted: #6b7280;
+  --co2-card-bg: #ffffff;
+  --co2-border: #e5e7eb;
+
+  /* Brand Colors */
+  --color-normal: #64748b;
+  /* Slate */
+  --color-fv12: #10b981;
+  /* Emerald */
+  --color-pv: #f59e0b;
+  /* Amber */
+  --color-danger: #ef4444;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --radius-md: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* Large KPI Badge in Header */
+.kpi-badge-large {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 1px solid #a7f3d0;
+  padding: 1.5rem 2rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.kpi-badge-large .kpi-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #047857;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpi-badge-large .kpi-value-large {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #065f46;
+}
+
+/* Section Headers */
+.co2-yearly-section,
+.co2-impact-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--co2-text-main);
+}
+
+.section-header p {
+  font-size: 1rem;
+  color: var(--co2-text-muted);
+  margin: 0;
+}
+
+.section-header strong {
+  color: var(--color-fv12);
+  font-weight: 700;
+}
+
+/* Custom Tooltip System */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: rgba(15, 23, 42, 0.95);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  white-space: normal;
+  max-width: 280px;
+  width: max-content;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-2px);
+  border: 5px solid transparent;
+  border-top-color: rgba(15, 23, 42, 0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 9999;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Yearly Section */
+.section-title {
+  margin-bottom: 1.5rem;
+}
+
+.section-title h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.section-title p {
+  color: var(--co2-text-muted);
+  margin: 0;
+}
+
+.yearly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.year-card {
+  background: var(--co2-card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--co2-border);
+  overflow: visible;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.year-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+}
+
+.year-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--co2-bg-secondary);
+  border-bottom: 1px solid var(--co2-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.year-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--co2-text-main);
+}
+
+.year-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.year-badge {
+  background: var(--co2-border);
+  color: var(--co2-text-muted);
+}
+
+.year-badge.forecast {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.year-badge.projected {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.year-body {
+  padding: 1.5rem;
+}
+
+.comparison-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.comp-label {
+  color: var(--co2-text-muted);
+}
+
+.comp-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.comp-value.normal {
+  color: var(--color-normal);
+}
+
+.comp-value.fv12 {
+  color: var(--color-fv12);
+}
+
+.comp-value.pv {
+  color: var(--color-pv);
+}
+
+.savings-highlight {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--co2-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+
+.savings-label {
+  color: var(--color-fv12);
+}
+
+.savings-value {
+  font-size: 1.125rem;
+  color: #059669;
+}
+
+/* Consumption Grid */
+.consumption-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cons-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cons-label {
+  font-size: 0.75rem;
+  color: var(--co2-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.cons-val {
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-fv12 {
+  color: var(--color-fv12);
+}
+
+.card-divider {
+  border: 0;
+  border-top: 1px solid var(--co2-border);
+  margin: 1.5rem 0;
+}
+
+/* Impact Section */
+.impact-section {
+  background: var(--co2-card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--co2-border);
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.impact-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.impact-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--co2-text-main);
+}
+
+.impact-header p {
+  color: var(--co2-text-muted);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.impact-header strong {
+  color: var(--color-fv12);
+  font-weight: 700;
+}
+
+.equivalents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.eq-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--co2-bg-secondary);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease;
+}
+
+.eq-card:hover {
+  transform: translateY(-2px);
+}
+
+.eq-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  line-height: 1;
+}
+
+.eq-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--co2-text-main);
+}
+
+.eq-label {
+  font-size: 0.875rem;
+  color: var(--co2-text-muted);
+  font-weight: 500;
+}
+
+/* States */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 4rem;
+  color: var(--co2-text-muted);
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--color-fv12);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.error-state {
+  color: var(--color-danger);
+  background: #fef2f2;
+  border-radius: var(--radius-lg);
+}

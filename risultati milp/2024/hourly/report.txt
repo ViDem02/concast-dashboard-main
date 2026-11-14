@@ -1,0 +1,10 @@
+REPORT FINALE OTTIMIZZAZIONE
+--------------------------------------------------
+Spesa Storica:     823,705.07 €
+Spesa Ottimizzata: 721,885.26 €
+RISPARMIO:         101,819.81 € (12.4%)
+------------------------------
+Produzione Cogen:  2,771,716 kWh
+Autoconsumo Cogen: 100.0%
+Copertura Carico:  57.7%
+--------------------------------------------------
