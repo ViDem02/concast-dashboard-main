@@ -1,53 +1,132 @@
-# Concast Energy Dashboard
+<div align="center">
 
-This site shows how Concast turns raw energy workbooks into clear decisions. Everything here is designed for a non‑technical jury: what data we ingest, how we process it, and what you can learn from the visual stories.
+# ⚡ Concast Energy Dashboard
 
-## What you see
-- Daily operations: demand, cogeneration, grid purchases, CO₂, and savings (real data, hour by hour).
-- MILP optimization: how the solver picks the best hourly mix and the benefits it unlocks.
-- Scenario 2026: a forward look that combines history, solar potential, and market price futures.
+**From raw XLSM workbooks to hour‑by‑hour energy decisions.**
+Demand, cogeneration, grid, CO₂ and cost, plus a MILP optimizer that shows what smarter dispatch would have saved.
 
-## From XLSM to JSON (data pipeline)
+![HTML](https://img.shields.io/badge/HTML5-static-E34F26?style=flat-square&logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/Vanilla_JS-no_build-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Python](https://img.shields.io/badge/Python-data_pipeline-3776AB?style=flat-square&logo=python&logoColor=white)
+![MILP](https://img.shields.io/badge/MILP-optimized_dispatch-10B981?style=flat-square)
+![Firebase](https://img.shields.io/badge/Firebase-hosting-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 
-| Stage | What happens | Evidence in repo |
+<br>
+
+<img src="docs/assets/milp-preview.svg" alt="Monthly historical vs MILP-optimized electricity cost for 2025, with €97,412 estimated savings" width="860">
+
+<sub><i>2025, monthly horizon: historical cost (red) vs MILP‑optimized cost (green).</i></sub>
+
+</div>
+
+---
+
+## 💶 The headline
+
+The MILP optimizer replays each year with a better grid‑vs‑cogeneration mix. Same plant, same demand, same prices.
+
+<table>
+<tr>
+<td align="center" width="25%"><h2>€107.8k</h2><sub>saved in 2025<br>(hourly horizon)</sub></td>
+<td align="center" width="25%"><h2>−14.7%</h2><sub>electricity spend<br>vs historical</sub></td>
+<td align="center" width="25%"><h2>€101.8k</h2><sub>saved in 2024<br>(hourly horizon)</sub></td>
+<td align="center" width="25%"><h2>100%</h2><sub>cogeneration<br>self‑consumed</sub></td>
+</tr>
+</table>
+
+<details>
+<summary><b>All horizons</b> (from <code>risultati milp/&lt;year&gt;/&lt;horizon&gt;/report.txt</code>)</summary>
+
+| Year | Horizon | Historical | Optimized | Savings | Load covered by coge |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 2025 | hourly  | €733,666 | €625,827 | **€107,839 (14.7%)** | 56.4% |
+| 2025 | daily   | €733,666 | €629,988 | €103,678 (14.1%) | 54.5% |
+| 2025 | weekly  | €733,666 | €635,355 | €98,311 (13.4%)  | 52.2% |
+| 2025 | monthly | €733,666 | €636,255 | €97,412 (13.3%)  | 52.0% |
+| 2024 | hourly  | €823,705 | €721,885 | **€101,820 (12.4%)** | 57.7% |
+| 2024 | daily   | €823,705 | €727,973 | €95,732 (11.6%)  | 55.4% |
+| 2024 | weekly  | €823,705 | €733,625 | €90,080 (10.9%)  | 53.3% |
+| 2024 | monthly | €823,705 | €735,055 | €88,650 (10.8%)  | 52.9% |
+
+The finer the horizon, the bigger the savings: hourly decisions follow price swings that monthly plans can't.
+
+</details>
+
+---
+
+## 🧭 What's inside
+
+| Page | What it answers |
+| --- | --- |
+| 🏠 **Dashboard** · `index.html` | How is the plant doing? Overall KPIs, demand, cogeneration, grid purchases and savings, hour by hour. |
+| 📈 **Statistiche EE** · `stats.html` | What does electric demand look like day by day? Detailed electricity statistics. |
+| 🧮 **MILP** · `milp.html` | What would optimal dispatch have cost? Coverage, savings vs baseline and grid vs coge split, by hour, day, week or month. |
+| 🔭 **Scenario 2026** · `forecast.html` | What's next? History plus FV12 solar plus three PUN/PSV price scenarios, with a suggested coge mode per month. |
+| 🌱 **CO₂** · `co2.html` | How much CO₂ do we avoid? Savings translated into plain‑language comparisons. |
+| 🏭 **Shift produzione** · `prodopti.html` | Does moving production in time pay off? Seasonal timetables with one vs three solar panels. |
+
+---
+
+## 🔁 How the data flows
+
+```mermaid
+flowchart LR
+    A["📊 XLSM workbooks<br/>demand · gas/PUN prices · setpoints"] --> B["🐍 Python scripts<br/>normalize · fix · validate hours"]
+    B --> C["🗂️ JSON<br/>year → month → day → hour"]
+    C --> D["🖥️ Dashboard<br/>apps/dashboard"]
+    C --> E["🧮 MILP solver<br/>min cost · demand = grid + coge"]
+    E --> F["📄 CSV + report<br/>risultati milp/"]
+    F --> D
+```
+
+| Stage | What happens | Where |
 | --- | --- | --- |
-| Source | Hourly XLSM files: demand, gas/PUN prices, setpoints (per year and scenario). | `data-pipeline/<year>/<scenario>/*.xlsm` |
-| Clean | Python scripts normalize headers, fix formats, and validate hours. | `data-pipeline/*/*.py` |
-| Shape | Data is reorganized into year → month → day → hour JSON files. | `*_estratti_<year>.json` |
-| Serve | The dashboard reads JSON directly to draw charts; no manual edits. | `apps/dashboard/data/` |
+| **Source** | Hourly workbooks per year and scenario (`normal`, `fv12`, `350` variants). | `data V3/`, `data V4/` |
+| **Clean** | Scripts normalize headers, fix formats and coge edge cases, and validate every hour. | `data-pipeline/*.py` |
+| **Shape** | Output becomes nested `year → month → day → hour` JSON. | `data-pipeline/<year>/<scenario>/*_estratti_<year>.json` |
+| **Optimize** | The MILP balances demand = grid + coge, respects setpoints and minimizes total cost. | `risultati milp/<year>/<horizon>/` |
+| **Serve** | The dashboard fetches JSON and CSV straight from disk. Nothing is edited by hand. | `apps/dashboard/data/` |
 
-Key takeaway: every chart can be traced back to an exact XLSM source and processing script.
+> **Every chart traces back to a specific workbook and script.** No numbers are typed in by hand.
 
-## MILP results at a glance
+---
 
-| Item | Description | Where it lives |
-| --- | --- | --- |
-| Inputs | Hourly demand, setpoints, gas costs, PUN prices. | `risultati milp/<year>/<horizon>/input*.csv` |
-| Solver | Mixed Integer Linear Program ensures balance (demand = grid + coge), respects setpoints, and minimizes total cost. | Solver logs in `report.txt` |
-| Outputs | Optimized CSVs with the best grid vs coge dispatch and KPIs (coverage, savings, optimized hours). | `risultati milp/<year>/<horizon>/risultato_ottimizzazione.csv` |
+## 🚀 Run it locally
 
-On `milp.html` you see: coverage of internal production, savings vs baseline, demand served by grid vs cogeneration, and row counts, with views by hour/day/week/month.
+No build step and no dependencies. It's a static site.
 
-## Scenario 2026 (forecast view)
+```bash
+cd apps/dashboard
+python3 -m http.server 8000
+# → open http://localhost:8000
+```
 
-| Piece | Source | What you see |
-| --- | --- | --- |
-| Baseline demand | Historical averages from 2024–2025 “Normal” data. | Monthly indicators and mix (grid vs coge). |
-| Solar (FV12) | Optimized FV12 profile added to the baseline. | Added production and CO₂ avoided. |
-| Prices | Three PUN/PSV 2026 scenarios applied to the energy mix. | Cost bands and sensitivity. |
-| Guidance | Fixed cogeneration mode suggested per month/week. | Clear “best mode” labels and savings deltas. |
+**Deploy:** `apps/dashboard` is configured for Firebase Hosting (`firebase deploy` from that folder). Any static host works.
 
-The page translates CO₂ savings into simple comparisons and keeps the language plain for quick reading.
+**Windows, no Python:** [`desktop/windows_launcher`](desktop/windows_launcher/README.md) builds a one‑click `ConcastDashboard.exe` that serves the dashboard from the system tray.
 
-## How to explore
-- `index.html`: overall KPIs and quick health of the plant.  
-- `stats.html`: detailed electric statistics.  
-- `forecast.html`: Scenario 2026 with solar and price assumptions.  
-- `milp.html`: optimization pipeline and KPI snapshots from solver outputs.  
-- Data sources live in `data-pipeline/` (XLSM → JSON) and `risultati milp/` (solver CSVs).
+---
 
-## Why it matters
-- Transparency: every chart is linked to an auditable source file.  
-- Optimization proof: MILP shows the economic upside of smarter dispatch.  
-- Future readiness: Scenario 2026 anticipates solar and market shifts, highlighting savings and CO₂ cuts with simple language.  
-- Decision speed: a single site merges history, optimization, and forward guidance for quick executive reviews.
+## 🗂️ Repo map
+
+```
+apps/dashboard/          static site: HTML, CSS, vanilla JS, data/
+apps/prototypes/         experiments before they reach production
+data-pipeline/           XLSM → JSON scripts and per-year/scenario outputs
+risultati milp/          MILP solver outputs: CSV, report.txt, plots
+services/forecasting/    2026 forecast builders and PUN estimators
+desktop/windows_launcher Windows .exe packaging
+docs/                    architecture notes and README assets
+```
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for workflows such as adding a new year of data, and [`DESIGN_SYSTEM.md`](DESIGN_SYSTEM.md) for the UI rules.
+
+---
+
+<div align="center">
+
+### Why it matters
+
+**Transparent:** every number is auditable · **Proven:** about €100k/year of optimization upside · **Ready for the future:** solar and market shifts are already modeled · **Fast:** history, optimization and forecast in one place
+
+</div>
