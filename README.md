@@ -14,7 +14,6 @@ Demand, cogeneration, grid, CO₂ and cost, plus the optimizers that decide <b>w
 ![Python](https://img.shields.io/badge/Python-data_pipeline-3776AB?style=flat-square&logo=python&logoColor=white)
 ![MILP](https://img.shields.io/badge/MILP-optimized_dispatch-10B981?style=flat-square)
 ![Scheduling](https://img.shields.io/badge/Scheduling-shifts_%26_chiller-0EA5E9?style=flat-square)
-![Firebase](https://img.shields.io/badge/Firebase-hosting-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 
 <br>
 
