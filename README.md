@@ -2,7 +2,7 @@
 
 # ⚡ Concast Energy Dashboard
 
-Filippo Adami · Lorenzo Arcangeli · Victor Gabriele De Matteis · Alessandro De Vidi · Ioan Gabriel Duta · Matteo Grisenti · Carlo Zamuner
+F. Adami · L. Arcangeli · V. G. De Matteis · A. De Vidi · I. G. Duta · M. Grisenti · C. Zamuner
 
 
 
