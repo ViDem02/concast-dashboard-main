@@ -2,13 +2,9 @@
 
 # ⚡ Concast Energy Dashboard
 
-<sub><b>Authors</b></sub><br>
 Filippo Adami · Lorenzo Arcangeli · Victor Gabriele De Matteis · Alessandro De Vidi · Ioan Gabriel Duta · Matteo Grisenti · Carlo Zamuner
 
-<br>
 
-
----
 
 **From raw XLSM workbooks to hour‑by‑hour energy decisions.**
 Demand, cogeneration, grid, CO₂ and cost, plus the optimizers that decide <b>where</b> each kWh comes from and <b>when</b> the plant uses it.
