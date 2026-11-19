@@ -2,13 +2,22 @@
 
 # ⚡ Concast Energy Dashboard
 
+<sub><b>Authors</b></sub><br>
+Filippo Adami · Lorenzo Arcangeli · Victor Gabriele De Matteis · Alessandro De Vidi · Ioan Gabriel Duta · Matteo Grisenti · Carlo Zamuner
+
+<br>
+
+
+---
+
 **From raw XLSM workbooks to hour‑by‑hour energy decisions.**
-Demand, cogeneration, grid, CO₂ and cost, plus a MILP optimizer that shows what smarter dispatch would have saved.
+Demand, cogeneration, grid, CO₂ and cost, plus the optimizers that decide <b>where</b> each kWh comes from and <b>when</b> the plant uses it.
 
 ![HTML](https://img.shields.io/badge/HTML5-static-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/Vanilla_JS-no_build-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-data_pipeline-3776AB?style=flat-square&logo=python&logoColor=white)
 ![MILP](https://img.shields.io/badge/MILP-optimized_dispatch-10B981?style=flat-square)
+![Scheduling](https://img.shields.io/badge/Scheduling-shifts_%26_chiller-0EA5E9?style=flat-square)
 ![Firebase](https://img.shields.io/badge/Firebase-hosting-FFCA28?style=flat-square&logo=firebase&logoColor=black)
 
 <br>
@@ -23,19 +32,20 @@ Demand, cogeneration, grid, CO₂ and cost, plus a MILP optimizer that shows wha
 
 ## 💶 The headline
 
-The MILP optimizer replays each year with a better grid‑vs‑cogeneration mix. Same plant, same demand, same prices.
+Same plant, same demand, same prices, replayed with two levers:
+**dispatch**, where the MILP chooses between grid and cogeneration every hour, and **timing**, where production shifts and the cold‑room chiller move toward hours with on‑site energy.
 
 <table>
 <tr>
-<td align="center" width="25%"><h2>€107.8k</h2><sub>saved in 2025<br>(hourly horizon)</sub></td>
+<td align="center" width="25%"><h2>€107.8k</h2><sub>saved by dispatch<br>in 2025</sub></td>
 <td align="center" width="25%"><h2>−14.7%</h2><sub>electricity spend<br>vs historical</sub></td>
-<td align="center" width="25%"><h2>€101.8k</h2><sub>saved in 2024<br>(hourly horizon)</sub></td>
-<td align="center" width="25%"><h2>100%</h2><sub>cogeneration<br>self‑consumed</sub></td>
+<td align="center" width="25%"><h2>−2.7%</h2><sub>more from shifting production<br>(summer 2025, 3 panels)</sub></td>
+<td align="center" width="25%"><h2>90–100%</h2><sub>of chiller energy from<br>on‑site sources (spring–fall)</sub></td>
 </tr>
 </table>
 
 <details>
-<summary><b>All horizons</b> (from <code>risultati milp/&lt;year&gt;/&lt;horizon&gt;/report.txt</code>)</summary>
+<summary><b>Dispatch: every MILP horizon</b> (from <code>risultati milp/&lt;year&gt;/&lt;horizon&gt;/report.txt</code>)</summary>
 
 | Year | Horizon | Historical | Optimized | Savings | Load covered by coge |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -52,6 +62,22 @@ The finer the horizon, the bigger the savings: hourly decisions follow price swi
 
 </details>
 
+<details>
+<summary><b>Timing: shifts and chiller, season by season</b> (from <code>apps/dashboard/prodopti/data/…/timetable.csv</code>)</summary>
+
+Change in cost, optimized production plan vs original plan:
+
+| Season | 2024 · 1 panel | 2024 · 3 panels | 2025 · 1 panel | 2025 · 3 panels |
+| --- | ---: | ---: | ---: | ---: |
+| ❄️ Winter | −1.1% | −0.7% | −0.6% | −0.8% |
+| 🌸 Spring | −0.9% | −1.9% | −0.6% | +0.8% |
+| ☀️ Summer | −0.8% | −0.9% | −1.9% | **−2.7% (€1,333)** |
+| 🍂 Fall   | −0.5% | −0.7% | — | — |
+
+Six production phases (`b_burr`, `b_conf`, `b_past`, `s_finit`, `s_hiro`, `s_torre`) have their shifts moved by up to ±120 min. The chiller works as a thermal battery: it pre‑cools while solar and coge are producing and coasts on stored cold when they aren't, always within its temperature band.
+
+</details>
+
 ---
 
 ## 🧭 What's inside
@@ -63,7 +89,7 @@ The finer the horizon, the bigger the savings: hourly decisions follow price swi
 | 🧮 **MILP** · `milp.html` | What would optimal dispatch have cost? Coverage, savings vs baseline and grid vs coge split, by hour, day, week or month. |
 | 🔭 **Scenario 2026** · `forecast.html` | What's next? History plus FV12 solar plus three PUN/PSV price scenarios, with a suggested coge mode per month. |
 | 🌱 **CO₂** · `co2.html` | How much CO₂ do we avoid? Savings translated into plain‑language comparisons. |
-| 🏭 **Shift produzione** · `prodopti.html` | Does moving production in time pay off? Seasonal timetables with one vs three solar panels. |
+| 🏭 **Shift produzione** · `prodopti.html` | When should the plant consume? A Gantt chart of original vs shifted production, minutes moved per shift, the chiller's on‑site vs grid power and cold‑room temperatures, per season, with one vs three solar panels. |
 
 ---
 
@@ -77,6 +103,9 @@ flowchart LR
     C --> E["🧮 MILP solver<br/>min cost · demand = grid + coge"]
     E --> F["📄 CSV + report<br/>risultati milp/"]
     F --> D
+    C --> G["⏱️ Shift & chiller scheduler<br/>5‑min timetables · cold‑room limits"]
+    G --> H["📄 Timetables + shift plans<br/>prodopti/data/"]
+    H --> D
 ```
 
 | Stage | What happens | Where |
@@ -84,7 +113,7 @@ flowchart LR
 | **Source** | Hourly workbooks per year and scenario (`normal`, `fv12`, `350` variants). | `data V3/`, `data V4/` |
 | **Clean** | Scripts normalize headers, fix formats and coge edge cases, and validate every hour. | `data-pipeline/*.py` |
 | **Shape** | Output becomes nested `year → month → day → hour` JSON. | `data-pipeline/<year>/<scenario>/*_estratti_<year>.json` |
-| **Optimize** | The MILP balances demand = grid + coge, respects setpoints and minimizes total cost. | `risultati milp/<year>/<horizon>/` |
+| **Optimize** | The MILP balances demand = grid + coge, respects setpoints and minimizes total cost. The scheduler shifts production phases and drives the chiller toward cheap, self‑generated hours. | `risultati milp/<year>/<horizon>/`<br>`apps/dashboard/prodopti/data/` |
 | **Serve** | The dashboard fetches JSON and CSV straight from disk. Nothing is edited by hand. | `apps/dashboard/data/` |
 
 > **Every chart traces back to a specific workbook and script.** No numbers are typed in by hand.
@@ -111,6 +140,7 @@ python3 -m http.server 8000
 
 ```
 apps/dashboard/          static site: HTML, CSS, vanilla JS, data/
+  └─ prodopti/data/      shift + chiller timetables per year/season/panel setup
 apps/prototypes/         experiments before they reach production
 data-pipeline/           XLSM → JSON scripts and per-year/scenario outputs
 risultati milp/          MILP solver outputs: CSV, report.txt, plots
@@ -127,6 +157,6 @@ See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for workflows such as adding 
 
 ### Why it matters
 
-**Transparent:** every number is auditable · **Proven:** about €100k/year of optimization upside · **Ready for the future:** solar and market shifts are already modeled · **Fast:** history, optimization and forecast in one place
+**Transparent:** every number is auditable · **Proven:** about €100k/year from dispatch, with more from smarter timing · **Ready for the future:** solar and market shifts are already modeled · **Fast:** history, optimization, scheduling and forecast in one place
 
 </div>
