@@ -22,9 +22,9 @@ Demand, cogeneration, grid, CO₂ and cost, plus the optimizers that decide <b>w
 
 <br>
 
-<img src="docs/assets/milp-preview.svg" alt="Monthly historical vs MILP-optimized electricity cost for 2025, with €97,412 estimated savings" width="860">
+<img src="docs/assets/milp-preview.svg" alt="Animated bar chart: monthly historical vs MILP-optimized electricity cost, January to October 2025" width="860">
 
-<sub><i>2025, monthly horizon: historical cost (red) vs MILP‑optimized cost (green).</i></sub>
+<sub><i>2025, monthly horizon: historical cost (red) vs MILP‑optimized cost (green), with the cut for each month.</i></sub>
 
 </div>
 
